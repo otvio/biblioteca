@@ -9,7 +9,7 @@ package laerciobranch;
  *
  * @author 8922198
  */
-public class Laerciobranch {
+public class Class {
 
     /**
      * @param args the command line arguments
