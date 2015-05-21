@@ -2,10 +2,13 @@
 package javafxapplication2;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.Serializable;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
@@ -59,20 +62,14 @@ public class JavaFXApplication2 extends Application
     {
         try {
             
-            PrintWriter fw = new PrintWriter("teste.txt");
+            PrintStream fw = new PrintStream(new File("teste.txt"));
             fw.println(new Testando(50));
             fw.println(new Testando(10));
             fw.println(new Testando(20));
-            fw.close();
 
-            BufferedReader arq = new BufferedReader(new FileReader("teste.txt"));
-
-            while (true)
-            {
-                String a = arq.readLine();
-                if (a == null) break;
-                System.out.println(a);
-            }
+            Scanner sc = new Scanner(new FileReader("teste.txt"));
+            while (sc.hasNextLine())
+                System.out.println(sc.nextLine());
 
         } catch (Exception ex) {
             Logger.getLogger(JavaFXApplication2.class.getName()).log(Level.SEVERE, null, ex);
