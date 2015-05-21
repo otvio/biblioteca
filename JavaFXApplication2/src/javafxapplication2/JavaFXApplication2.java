@@ -1,10 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package javafxapplication2;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -13,12 +16,8 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-/**
- *
- * @author 8936801
- */
-public class JavaFXApplication2 extends Application {
-    
+public class JavaFXApplication2 extends Application 
+{
     @Override
     public void start(Stage primaryStage) {
         Button btn = new Button();
@@ -40,12 +39,43 @@ public class JavaFXApplication2 extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        launch(args);
+    
+    public static class Testando implements Serializable
+    {
+        int k;
+        public Testando(int x)
+        {
+            this.k = x;
+        }
+        
+        @Override
+        public String toString()
+        {
+            return ("Testando Class: k = (" + this.k + ")\n");
+        }
     }
     
+    public static void main(String[] args)
+    {
+        try {
+            
+            PrintWriter fw = new PrintWriter("teste.txt");
+            fw.println(new Testando(50));
+            fw.println(new Testando(10));
+            fw.println(new Testando(20));
+            fw.close();
+
+            BufferedReader arq = new BufferedReader(new FileReader("teste.txt"));
+
+            while (true)
+            {
+                String a = arq.readLine();
+                if (a == null) break;
+                System.out.println(a);
+            }
+
+        } catch (Exception ex) {
+            Logger.getLogger(JavaFXApplication2.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
