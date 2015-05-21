@@ -1,0 +1,8 @@
+- criar projeto
+- seleciona o projeto e Equipe->Git-Inicializar Repositório
+- Escolher diretório que a pasta .git será criada
+- clicar com o botao direito no projeto Git->Fazer Commit
+- adicionar uma msg no campo "Mensagem de Commit" e clicar em fazer commit
+- selecionar o projeto e ir em Equipe->Remoto->Expandir
+- selecionar radiobutton 2, especificar a URL e adicionar o user e password (ou radiobutton 1 caso a URL já esteja definida)
+- selecionar ramificação a enviar
