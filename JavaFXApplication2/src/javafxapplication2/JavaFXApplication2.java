@@ -72,7 +72,7 @@ public class JavaFXApplication2 extends Application
                 System.out.println(sc.nextLine());
 
         } catch (Exception ex) {
-            Logger.getLogger(JavaFXApplication2.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
     }
 }
