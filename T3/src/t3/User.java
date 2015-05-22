@@ -9,15 +9,17 @@ public abstract class User
     private String RG;
     private int bookLimit;
     private int daysLimit;
+    private int code;
     
     
-    public User(String name, String cpf, String rg, int bookLimit, int daysLimit)
+    public User(String name, String cpf, String rg, int bookLimit, int daysLimit, int code)
     {
         this.name = name;
         this.CPF  = cpf;
         this.RG = rg;
         this.bookLimit = bookLimit;
         this.daysLimit = daysLimit;        
+        this.code = code;
     }    
 
     public String getName()
@@ -69,4 +71,9 @@ public abstract class User
     {
         this.daysLimit = daysLimit;
     }       
+
+    public int getCode() 
+    {
+        return code;
+    }    
 }
