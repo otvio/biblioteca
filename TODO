@@ -1,0 +1,31 @@
+##########################################################################################################
+
+	TODO:
+  se alguém começar a fazer algo, editar esse arquivo e indicar que está fazendo.
+
+  - permitir que o usuário se identifique (cadastro e login)  (criar um usuário admin - senha 123456)
+
+
+  - permitir inserir novos livros (pelo adm)
+
+
+  - lista de livros (pegos de um arquivo)
+
+
+  - lista de empréstimos do usuário logado (pegos de um arquivo)
+
+
+  - permitir empréstimos (já inserir na listas de empréstimos e dar append no arquivo "emprestimos")
+
+
+##########################################################################################################
+
+Como será organizado os livros no arquivo:
+code,title,author,issue,type,pages,available,quantity
+
+
+
+Como será organizado os usuários no arquivo:
+code,name,cpf,rg,bookLimit,daysLimit
+
+##########################################################################################################
