@@ -9,19 +9,19 @@ public class Book {
     private int issue;
     private int code;
     private String title;
-    private String autor;
+    private String author;
     private String type;
     private int quantity;
     private int available;
         
-    public Book(int pages, int issue, int code, String title, String autor, String type, 
+    public Book(int pages, int issue, int code, String title, String author, String type, 
                 int quantity, int available){
         
         this.pages = pages;
         this.issue = issue;
         this.code = code;
         this.title = title;
-        this.autor = autor;
+        this.author = author;
         this.type = type;
         this.available = available;
         this.quantity = quantity;
@@ -59,8 +59,8 @@ public class Book {
         return title;
     }
     
-        public String getAutor() {
-        return autor;
+    public String getAuthor() {
+        return author;
     }
     
 }
