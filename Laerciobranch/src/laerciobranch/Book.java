@@ -11,9 +11,11 @@ public class Book {
     private String title;
     private String autor;
     private String type;
-    
+    private int quantity;
+    private int available;
         
-    public Book(int pages, int issue, int code, String title, String autor, String type){
+    public Book(int pages, int issue, int code, String title, String autor, String type, 
+                int quantity, int available){
         
         this.pages = pages;
         this.issue = issue;
@@ -21,6 +23,20 @@ public class Book {
         this.title = title;
         this.autor = autor;
         this.type = type;
+        this.available = available;
+        this.quantity = quantity;
+    }
+
+    public void setAvailable(int available) {
+        this.available = available;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public int getAvailable() {
+        return available;
     }
 
     public String getType() {
