@@ -1,0 +1,61 @@
+
+package javaapplication1;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.Serializable;
+import java.util.List;
+import java.util.stream.Collectors;
+
+
+public class JavaApplication1 
+{
+    public static class Testando implements Serializable
+    {
+        int k;
+        String str;
+        
+        public Testando(int x)
+        {
+            this.k = x;
+            str = "NOTHING";
+        }
+        
+        public Testando(String str)
+        {
+            this.k = -1;
+            this.str = "'" + str + "'";
+        }
+        
+        @Override
+        public String toString()
+        {
+            return (this.k + "," + str);
+            //return ("Testando Class: k = (" + this.k + ")\n");
+        }
+    }
+    
+    
+    public static void main(String[] args) 
+    {
+      // considerando que já há um arquivo "teste.txt" assim: 
+      // 50,NOTHING
+      // 10,NOTHING
+      // 20,NUUUING
+      
+        try 
+        {
+            BufferedReader sc = new BufferedReader(new FileReader("teste.txt"));
+            
+            List<Testando> l = sc.lines()
+              .map(str -> new Testando(str))
+              .filter(t -> "NOTHING".equals(t.str.substring(t.str.length() - "NOTHING".length() - 1, t.str.length() - 1)))
+              .collect(Collectors.toList());
+            
+            l.stream()
+             .forEach(System.out::println);
+            
+        } catch (Exception ex) { }
+    }
+    
+}
