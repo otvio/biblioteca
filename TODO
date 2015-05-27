@@ -1,6 +1,8 @@
 ##########################################################################################################
 
 	TODO:
+	
+	
   se alguém começar a fazer algo, editar esse arquivo e indicar que está fazendo.
 
   - permitir que o usuário se identifique (cadastro e login)  (criar um usuário admin - senha 123456)
@@ -14,9 +16,6 @@
   
   - calcular a suspensão em caso de atraso. Atraso na entrega do livro implica em suspensão 
     pela quantidade de dias atrasados
-    
-    
-  - simular qual é a data atual
   
 
 ##########################################################################################################
