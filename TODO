@@ -12,11 +12,18 @@
 
 
   - registrar os empréstimos, avisar quando está em atraso, registrar devoluções
+    Obs: como checar atraso: pegar a diferença entre a data atual e cada uma das datas de seus empréstimos¹,
+         ordenar de forma crescente e verificar se a primeira diferença é menor que zero; se sim, há 
+         livro com atraso de entrega.
   
   
   - calcular a suspensão em caso de atraso. Atraso na entrega do livro implica em suspensão 
     pela quantidade de dias atrasados
   
+  
+  - para listar os empréstimos de um usuário específico na ordem de entrega é possível utilizar o que foi
+    citado em (¹).
+
 
 ##########################################################################################################
 
