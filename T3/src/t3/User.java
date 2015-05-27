@@ -12,11 +12,12 @@ public abstract class User
     private String name;
     private String CPF;
     private String RG;
+    private char type;
     private int bookLimit;
     private int daysLimit;
     private int code;
 
-    public User(String name, String cpf, String rg, int bookLimit, int daysLimit, int code)
+    public User(String name, String cpf, String rg, int bookLimit, int daysLimit, int code, char type)
     {
         this.name = name;
         this.CPF  = cpf;
@@ -24,6 +25,42 @@ public abstract class User
         this.bookLimit = bookLimit;
         this.daysLimit = daysLimit;        
         this.code = code;
+        this.type = type;
+    }
+
+    private User() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public void createUser(){
+        try{
+            File fp = new File("users.txt"); // variavel que 'representara' o arquivo book
+            FileWriter fw = new FileWriter(fp, true); // empacotar o file para que possa escrever nele, e adicionar o campo true para indicar append
+            PrintWriter pw = new PrintWriter(fw); // cria um PrintWriter que irá escrever no arquivo
+
+            if(fp.exists() == false){ // caso o arquivo nao exista, cria um arquivo
+                fp.createNewFile();
+            }
+
+            pw.print(this.getCode());
+            pw.print(",");
+            pw.print(this.getName());
+            pw.print(",");
+            pw.print(this.getCPF());
+            pw.print(",");
+            pw.print(this.getRG());
+            pw.print(",");
+            pw.print(this.getBookLimit());
+            pw.print(",");
+            pw.println(this.getDaysLimit());
+
+            pw.close(); 
+            fw.close();
+        }
+
+        catch(Exception e){
+            System.out.println("Can't write in the file :/");
+        }
     }
 
     public String getName()
@@ -88,22 +125,22 @@ public abstract class User
         
         if(input.equals("Teacher")){
             Teacher t = new Teacher(sc.nextLine(), sc.nextLine(), sc.nextLine(), 6, 60, 0);
-            t.CreateTeacher(t);
+            //createUser(this);
         }
         else if(input.equals("Student")){
             Student s = new Student(sc.nextLine(), sc.nextLine(), sc.nextLine(), 4, 15, 0);
-            s.CreateStudent(s);
         }
         else if(input.equals("Person")){
             Person p = new Person(sc.nextLine(), sc.nextLine(), sc.nextLine(), 2, 15, 0);
-            p.CreatePerson(p);
         }
     }
     
     public static void main (String [] args){
         
         Teacher t = new Teacher("0", "0", "0", 0, 0, 0);
-
+        
         t.insertUser();
+        
+        User x = new Teacher("0", "0", "0", 0, 0, 0);  
     }
 }
