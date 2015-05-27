@@ -22,7 +22,6 @@ public class Borrowing
     private Calendar dateMax;
 
     
-    
     public Borrowing(int code, int codeUser, int codeBook, boolean returned, String dateBorrow, String dateReturn, String dateMax)
     {
         String[] date;

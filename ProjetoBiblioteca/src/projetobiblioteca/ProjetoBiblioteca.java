@@ -76,6 +76,17 @@ public class ProjetoBiblioteca
         }
     }
     
+    public static void newBorrowing(List<Borrowing> borrowingslist, List<Borrowing> userBorrowings, User user, Book book, Calendar current)
+    {
+        int code = borrowingslist.get(0).getCode() + 1;
+        //Borrowing b = new Borrowing(code, user.getCode(), book.getCode(), false, current.clone(), );
+        //borrowingslist.add(b);
+        //userBorrowings.add(b);
+        
+        sortBorrowingsList(borrowingslist);
+        sortBorrowingsList(userBorrowings);
+    }
+    
     public static long getDateDiff(Calendar date1, Calendar date2) 
     {
         long diff = date1.getTime().getTime() - date2.getTime().getTime();
@@ -186,8 +197,15 @@ public class ProjetoBiblioteca
                             Boolean.parseBoolean(borrowingdata[3]), borrowingdata[4], borrowingdata[5], borrowingdata[6])
             );
         }
-
-        Collections.sort(borrowingslist, new Comparator<Borrowing>()
+        
+        sortBorrowingsList(borrowingslist);
+        
+        return (borrowingslist);
+    }
+    
+    private static void sortBorrowingsList(List<Borrowing> list)
+    {
+        Collections.sort(list, new Comparator<Borrowing>()
         {
             @Override
             public int compare(Borrowing o1, Borrowing o2) 
@@ -195,7 +213,5 @@ public class ProjetoBiblioteca
                 return ((o1.getCode() < o2.getCode()) ? 1 : -1);
             }
         });
-            
-        return (borrowingslist);
     }
 }
