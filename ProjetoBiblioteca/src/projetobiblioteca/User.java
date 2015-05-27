@@ -33,8 +33,10 @@ public abstract class User
         return type;
     }
     
-    public void createUser(){
-        try{
+    public void addFileUser()
+    {
+        try
+        {
             File fp = new File("users.txt"); // variavel que 'representara' o arquivo book
             FileWriter fw = new FileWriter(fp, true); // empacotar o file para que possa escrever nele, e adicionar o campo true para indicar append
             PrintWriter pw = new PrintWriter(fw); // cria um PrintWriter que irá escrever no arquivo

@@ -1,7 +1,10 @@
 
 package projetobiblioteca;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.PrintStream;
+import java.io.PrintWriter;
 
 public class Book 
 {
@@ -78,4 +81,44 @@ public class Book
         pw.print("Quantidade disponivel:" + this.getAvailable() + " ");
         pw.println("Quantidade total:" + this.getQuantity());
     }
+    
+    public static void addFileBook(Book bk) 
+    {
+        try{
+            File fp = new File("book.txt"); // variavel que 'representara' o arquivo book
+            FileWriter fw = new FileWriter(fp, true); // empacotar o file para que possa escrever nele, e adicionar o campo true para indicar append
+            PrintWriter pw = new PrintWriter(fw); // cria um PrintWriter que irá escrever no arquivo
+
+            if(fp.exists() == false){ // caso o arquivo nao exista, cria um arquivo
+                fp.createNewFile();
+            }
+            // ### Escrever os itens do livro aqui nesta linha ### //
+            // Comandos que salvam os itens no arquivo
+            
+            pw.print(bk.getCode());
+            pw.print(",");
+            pw.print(bk.getTitle());
+            pw.print(",");
+            pw.print(bk.getAuthor());
+            pw.print(",");
+            pw.print(bk.getIssue());
+            pw.print(",");
+            pw.print(bk.getType());
+            pw.print(",");
+            pw.print(bk.getPages());
+            pw.print(",");
+            pw.print(bk.getAvailable());
+            pw.print(",");
+            pw.println(bk.getQuantity());
+            
+            // #Termina de gravar os itens no arquivo com uma quebra de linha no final do arquivo# //
+            
+            pw.close(); 
+            fw.close();
+        }
+        catch(Exception e){
+            System.out.println("Something wrong happens D:\n");
+        }
+    }
+    
 }
