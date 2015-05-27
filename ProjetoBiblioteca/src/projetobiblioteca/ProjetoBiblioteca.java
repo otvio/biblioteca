@@ -12,7 +12,7 @@ import java.util.Comparator;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Scanner;
-import static projetobiblioteca.Borrowing.dateFormat;
+import java.util.concurrent.TimeUnit;
 
 //SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 //Calendar teste = new GregorianCalendar(2012, 1, 29);
@@ -74,6 +74,22 @@ public class ProjetoBiblioteca
             
             date = new GregorianCalendar(year, month, day);
         }
+    }
+    
+    public static long getDateDiff(Calendar date1, Calendar date2) 
+    {
+        long diff = date1.getTime().getTime() - date2.getTime().getTime();
+        return (TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
+    }
+    
+    public static boolean isLate(Borrowing borrowing, Calendar current)
+    {
+        return (current.compareTo(borrowing.getDateReturn()) > 0);
+    }
+    
+    public static Borrowing borrowingAt(List<Borrowing> borrowingslist, int codeBorrowing)
+    {
+        return (borrowingslist.get(borrowingslist.size() - 1 - codeBorrowing));
     }
     
     public static List<User> getUsersList(BufferedReader buffReader) throws IOException
