@@ -33,4 +33,7 @@ code,name,cpf,rg,bookLimit,daysLimit,type
 Como será organizado os empréstimos no arquivo:
 code,codeUser,codeBook,returned,dateBorrow,dateReturn
 
+Obs: dateBorrow e dateReturn são no formato: "DD/MM/YYYY"
+
+
 ##########################################################################################################
