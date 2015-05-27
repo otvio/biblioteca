@@ -26,6 +26,6 @@ code,title,author,issue,type,pages,available,quantity
 
 
 Como será organizado os usuários no arquivo:
-code,name,cpf,rg,bookLimit,daysLimit
+code,name,cpf,rg,bookLimit,daysLimit,type
 
 ##########################################################################################################
