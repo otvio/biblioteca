@@ -6,17 +6,18 @@
   - permitir que o usuário se identifique (cadastro e login)  (criar um usuário admin - senha 123456)
 
 
-  - permitir inserir novos livros (pelo adm) - (Tentando Fazer - LaércioJr)
-
-
-  - lista de livros (pegos de um arquivo)
-
-
-  - lista de empréstimos do usuário logado (pegos de um arquivo)
-
-
   - permitir empréstimos (já inserir na listas de empréstimos e dar append no arquivo "emprestimos")
 
+
+  - registrar os empréstimos, avisar quando está em atraso, registrar devoluções
+  
+  
+  - calcular a suspensão em caso de atraso. Atraso na entrega do livro implica em suspensão 
+    pela quantidade de dias atrasados
+    
+    
+  - simular qual é a data atual
+  
 
 ##########################################################################################################
 
