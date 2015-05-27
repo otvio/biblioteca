@@ -5,10 +5,10 @@
 	
   se alguém começar a fazer algo, editar esse arquivo e indicar que está fazendo.
 
-  - permitir que o usuário se identifique (cadastro e login)  (criar um usuário admin - senha 123456)
+  - permitir que o usuário se identifique (cadastro e login)  (criar um usuário admin - senha 123456) (Ricardo fazendo)
 
 
-  - permitir empréstimos (já inserir na listas de empréstimos e dar append no arquivo "emprestimos")
+  - permitir empréstimos (já inserir na listas de empréstimos) really fast
 
 
   - registrar os empréstimos, avisar quando está em atraso, registrar devoluções
@@ -38,9 +38,13 @@ code,name,cpf,rg,bookLimit,daysLimit,type
 
 
 Como será organizado os empréstimos no arquivo:
-code,codeUser,codeBook,returned,dateBorrow,dateReturn
+code,codeUser,codeBook,returned,dateBorrow,dateReturn,dateMax
 
 Obs: dateBorrow e dateReturn são no formato: "DD/MM/YYYY"
+
+
+Como será organizado os logins no arquivo:
+code,username,password
 
 
 ##########################################################################################################
