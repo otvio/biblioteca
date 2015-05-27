@@ -11,6 +11,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Scanner;
+import static projetobiblioteca.Borrowing.dateFormat;
 
 //SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 //Calendar teste = new GregorianCalendar(2012, 1, 29);
@@ -18,12 +20,21 @@ import java.util.List;
 
 public class ProjetoBiblioteca
 {
+    public static SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    
     public static void main(String[] args) 
     {
+        String date_choice;
+        
         BufferedReader buffReader;
         List<User> userlist;
         List<Book> bookslist;
         List<Borrowing> borrowingslist;
+        
+        Calendar date;
+        int day, month, year;
+        
+        Scanner input = new Scanner (System.in);
         
         try
         {
@@ -38,7 +49,31 @@ public class ProjetoBiblioteca
  
         } catch (Exception ex) { }
         
+        System.out.println("Bem vindo ao programa LORDedalus.\n");
         
+        System.out.println("A data utilizada será:\n"
+                         + "   1. A data atual (do sistema)\n"
+                         + "   2. A data desejada pelo usuário\n");
+        
+        do
+        {
+            date_choice = input.next();
+        }while ((!date_choice.equals("1")) && (!date_choice.equals("2")));
+      
+        if (date_choice.equals("1"))
+            date = Calendar.getInstance();
+        else
+        {
+            System.out.println("Digite a data desejada:");
+            System.out.print("   Dia: ");
+            day = input.nextInt();
+            System.out.print("   Mes: ");
+            month = input.nextInt() - 1;
+            System.out.print("   Ano: ");
+            year = input.nextInt();
+            
+            date = new GregorianCalendar(year, month, day);
+        }
     }
     
     public static List<User> getUsersList(BufferedReader buffReader) throws IOException
