@@ -183,7 +183,7 @@ public class ProjetoBiblioteca
             borrowingslist.add(
                     new Borrowing(Integer.parseInt(borrowingdata[0]), 
                             Integer.parseInt(borrowingdata[1]), Integer.parseInt(borrowingdata[2]), 
-                            Boolean.parseBoolean(borrowingdata[3]), borrowingdata[4], borrowingdata[5])
+                            Boolean.parseBoolean(borrowingdata[3]), borrowingdata[4], borrowingdata[5], borrowingdata[6])
             );
         }
 

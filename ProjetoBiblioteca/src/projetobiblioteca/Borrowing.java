@@ -19,8 +19,11 @@ public class Borrowing
     private boolean returned;
     private Calendar dateBorrow;
     private Calendar dateReturn;
+    private Calendar dateMax;
+
     
-    public Borrowing(int code, int codeUser, int codeBook, boolean returned, String dateBorrow, String dateReturn)
+    
+    public Borrowing(int code, int codeUser, int codeBook, boolean returned, String dateBorrow, String dateReturn, String dateMax)
     {
         String[] date;
         
@@ -42,6 +45,21 @@ public class Borrowing
                 Integer.parseInt(date[2]), 
                 Integer.parseInt(date[1]) - 1, Integer.parseInt(date[0])
         );
+        
+        date = dateMax.split("/");
+        
+        this.dateMax = new GregorianCalendar(
+                Integer.parseInt(date[2]), 
+                Integer.parseInt(date[1]) - 1, Integer.parseInt(date[0])
+        );
+    }
+    
+    public Calendar getDateMax() {
+        return dateMax;
+    }
+
+    public void setDateMax(Calendar dateMax) {
+        this.dateMax = dateMax;
     }
     
     public int getCode() {
