@@ -144,9 +144,10 @@ public class ProjetoBiblioteca
                 case "5":
                     System.out.println("Qual o titulo do livro que deseja devolver?\n");
                     borrow  = input.nextLine();
-                    
+                    codeBook = -1;
                     for(int i = 0; i < bookslist.size(); i++){
-                        if(bookslist.get(i).getTitle().equals(borrow)){
+                        if(bookslist.get(i).getTitle().equals(borrow) && userBorrowings.get(i).isReturned()==false)
+                        {
                             codeBook = bookslist.get(i).getCode();
                             break;
                         }
@@ -158,6 +159,15 @@ public class ProjetoBiblioteca
                     }
                     
                     ProjetoBiblioteca.returnABook(borrowingslist, userBorrowings, date, codeBook, user.getCode());
+                    for(int i = 0 ; i<bookslist.size(); i++)
+                    {
+                        if(bookslist.get(i).getCode()==codeBook)
+                        {
+                            bookslist.get(i).setAvailable(bookslist.get(i).getAvailable()+1);
+                            break;
+                        }                            
+                    }
+                    System.out.println("\nDevolução efetuada com sucesso.\n");
                     
                     break;
                 case "6":
