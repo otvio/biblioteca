@@ -26,18 +26,22 @@ public class ProjetoBiblioteca
     
     public static void main(String[] args)
     {
+        int option_int;
+        
         BufferedReader buffReader;
+        
         List<User> userlist = new ArrayList<>();
         List<Book> bookslist = new ArrayList<>();
-        List<Borrowing> borrowingslist = new ArrayList<>();
         List<Login> loginlist = new ArrayList<>();
         
+        List<Borrowing> borrowingslist = new ArrayList<>();
         List<Borrowing> userBorrowings = new ArrayList<>();
         
         Calendar date;
         User user;
         
-        Scanner input = new Scanner (System.in);
+        Scanner input;
+        String option = "-";
         
         try
         {
@@ -74,21 +78,63 @@ public class ProjetoBiblioteca
             
         } catch (Exception ex) { }
         
+        input = new Scanner (System.in);
         
         date = askDate(input);
         user = askUser(userlist, loginlist, input);
         userBorrowings = borrowedBooks(borrowingslist, user.getCode());
         
-//        System.out.println("(1). Visualizar todos livros");
-//        System.out.println("(2). Visualizar histórico de empréstimos pessoais");
-//        System.out.println("(3). Listar empréstimos pessoais (não devolvidos)");
-//        System.out.println("(4). Realizar empréstimo");
-//        System.out.println("(5). Devolver livro");
-//        System.out.println("(6). Verificar situação de atraso");
-//        System.out.println("(7). Visualizar todos usuários do sistema");
-//        System.out.println("(8). Visualizar todos empréstimos do sistema");
-//        System.out.println("(9). Adicionar livro no estoque");
         
+        //loop principal do programa: checa a opcao escolhida pelo usuario e executa de acordo
+        while (!("10").equals(option))
+        {
+            do
+            {
+                printHeader();
+                printOptions();
+                option = input.nextLine();
+                option_int = Integer.parseInt(option);
+            } while ((option_int < 1) && (option_int > 10));
+            
+            switch (option)
+            {
+                case "1": // (1).  Visualizar todos livros
+                    
+                    System.out.println("\n\n\t||-----------------------------------------||"
+                                       + "\n\t||   Lista de todos livros na biblioteca   ||"
+                                       + "\n\t||-----------------------------------------||\n\n");
+                    
+                    for (Book b : bookslist)
+                        b.printBook();
+                    
+                    System.out.println("\n\n:::   Listagem concluída com SUCESSO  :::\n");
+                    
+                    break;
+                case "2":
+                    break; 
+                case "3":
+                    break;
+                case "4":
+                    break;
+                case "5":
+                    break;
+                case "6":
+                    break;
+                case "7":
+                    break;
+                case "8":
+                    break;
+                case "9":
+                    break;                            
+            }
+            
+            if (!("10").equals(option))
+            {
+                System.out.println("\nPressione qualquer tecla para continuar...");
+                option = input.nextLine();                
+                option = (option.equals("10")) ? "-" : option;
+            }
+        }
         
         /*---------- FINALIZANDO PROGRAMA ----------*/
         
@@ -110,7 +156,21 @@ public class ProjetoBiblioteca
     public static void printHeader()
     {
         System.out.println("\n\n\n\n\n");
-        System.out.println("::: LORDedalus :::\n");
+        System.out.println("\t::: LORDedalus :::\n");
+    }
+    
+    public static void printOptions()
+    {
+        System.out.println("(1).  Visualizar todos livros");
+        System.out.println("(2).  Visualizar histórico de empréstimos pessoais");
+        System.out.println("(3).  Listar empréstimos pessoais (não devolvidos)");
+        System.out.println("(4).  Realizar empréstimo");
+        System.out.println("(5).  Devolver livro");
+        System.out.println("(6).  Verificar situação de atraso");
+        System.out.println("(7).  Visualizar todos usuários do sistema");
+        System.out.println("(8).  Visualizar todos empréstimos do sistema");
+        System.out.println("(9).  Adicionar livro no estoque");
+        System.out.println("(10). Sair do sistema");
     }
     
     public static Calendar askDate(Scanner input)
@@ -163,8 +223,16 @@ public class ProjetoBiblioteca
         do
         {
             user_choice = input.nextLine();
+            
+            if ((user_choice.equals("2")) && userslist.isEmpty())
+            {
+                System.out.println("::: Não há usuários ainda, crie um novo! :::\n\n");
+                user_choice = "3";
+            }
+                
         }while ((!user_choice.equals("1")) && (!user_choice.equals("2")));
         
+
         if (user_choice.equals("1"))
         {
             codeUser = (!userslist.isEmpty()) ? (userslist.get(userslist.size() - 1).getCode() + 1) : 0;

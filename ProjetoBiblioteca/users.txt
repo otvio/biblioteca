@@ -1,2 +1,1 @@
-0,admin,desnecessarioCPF,desnecessarioRG,6,60,T
-0,admin,desnecessarioCPF,desnecessarioRG,6,60,T
+0,admin,noCPF,noRG,6,60,T
