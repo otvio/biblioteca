@@ -137,7 +137,19 @@ public class ProjetoBiblioteca
                     System.out.println("\n\n:::   Listagem concluída com SUCESSO  :::\n");
                     
                     break;
-                case "8":
+                    
+                case "8": 
+                    
+                    /*--------- (8).  Visualizar histórico de empréstimos do sistema  ---------*/
+                    System.out.println("\n\n\t||--------------------------------------------||"
+                                       + "\n\t||   Histórico de empréstimos da biblioteca   ||"
+                                       + "\n\t||--------------------------------------------||\n\n");
+                    
+                    for (Borrowing b : borrowingslist)
+                        b.printBorrowing(userlist.get(b.getCodeUser()), bookslist.get(b.getCodeBook()));
+                    
+                    System.out.println("\n\n:::   Listagem concluída com SUCESSO  :::\n");
+                    
                     break;
                 case "9":
                     break;                            
@@ -196,10 +208,10 @@ public class ProjetoBiblioteca
         System.out.println("(4).  Realizar empréstimo");
         System.out.println("(5).  Devolver livro");
         System.out.println("(6).  Verificar situação de atraso");
-        System.out.println("(7).  Visualizar todos usuários do sistema");
-        System.out.println("(8).  Visualizar histórico de empréstimos do sistema");
+        System.out.println("(7).  Visualizar todos usuários da biblioteca");
+        System.out.println("(8).  Visualizar histórico de empréstimos da biblioteca");
         System.out.println("(9).  Adicionar livro no estoque");
-        System.out.println("(10). Sair do sistema");
+        System.out.println("(10). Sair");
     }
     
     public static Calendar askDate(Scanner input)
