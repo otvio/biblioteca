@@ -70,46 +70,49 @@ public class Book
     
     public void printBook()
     {
-        PrintStream pw = new PrintStream(System.out); // cria um PrintStream que irá escrever na tela
+        PrintStream pw = new PrintStream(System.out);
             
-        pw.print("Codigo:" + this.getCode() + " ");
-        pw.print("Titulo:" + this.getTitle() + " ");
-        pw.print("Autor:" + this.getAuthor() + " ");
-        pw.print("Edicao:" + this.getIssue() + " ");
-        pw.print("Tipo:" + this.getType() + " ");
-        pw.print("Paginas:" + this.getPages() + " ");
-        pw.print("Quantidade disponivel:" + this.getAvailable() + " ");
-        pw.println("Quantidade total:" + this.getQuantity());
+        pw.println("//--------------------------------------");   
+        pw.println("||Código: " + this.getCode());
+        pw.println("||Título: " + this.getTitle());
+        pw.println("||Autor: " + this.getAuthor());
+        pw.println("||Edição: " + this.getIssue());
+        pw.println("||Tipo: " +((this.getType().equals("T")) ? "Texto" : "Geral"));
+        pw.println("||Quantidade de páginas: " + this.getPages());
+        pw.println("||Quantidade disponível: " + this.getAvailable());
+        pw.println("||Quantidade total: " + this.getQuantity());
+        pw.println("\\\\--------------------------------------");
     }
     
-    public static void addFileBook(Book bk) 
+    public void addFileBook() 
     {
         try{
-            File fp = new File("book.txt"); // variavel que 'representara' o arquivo book
+            File fp = new File("books.txt"); // variavel que 'representara' o arquivo book
             FileWriter fw = new FileWriter(fp, true); // empacotar o file para que possa escrever nele, e adicionar o campo true para indicar append
             PrintWriter pw = new PrintWriter(fw); // cria um PrintWriter que irá escrever no arquivo
 
             if(fp.exists() == false){ // caso o arquivo nao exista, cria um arquivo
+                System.out.println("NAO EXISTE ARQUIVO");
                 fp.createNewFile();
             }
             // ### Escrever os itens do livro aqui nesta linha ### //
             // Comandos que salvam os itens no arquivo
             
-            pw.print(bk.getCode());
+            pw.print(this.getCode());
             pw.print(",");
-            pw.print(bk.getTitle());
+            pw.print(this.getTitle());
             pw.print(",");
-            pw.print(bk.getAuthor());
+            pw.print(this.getAuthor());
             pw.print(",");
-            pw.print(bk.getIssue());
+            pw.print(this.getIssue());
             pw.print(",");
-            pw.print(bk.getType());
+            pw.print(this.getType());
             pw.print(",");
-            pw.print(bk.getPages());
+            pw.print(this.getPages());
             pw.print(",");
-            pw.print(bk.getAvailable());
+            pw.print(this.getAvailable());
             pw.print(",");
-            pw.println(bk.getQuantity());
+            pw.println(this.getQuantity());
             
             // #Termina de gravar os itens no arquivo com uma quebra de linha no final do arquivo# //
             

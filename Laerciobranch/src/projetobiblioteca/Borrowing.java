@@ -8,7 +8,6 @@ import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.List;
 
 public class Borrowing 
 {
@@ -21,8 +20,10 @@ public class Borrowing
     private Calendar dateBorrow;
     private Calendar dateReturn;
     private Calendar dateMax;
+
     
-    public Borrowing(int code, int codeUser, int codeBook, boolean returned, String dateBorrow, String dateReturn, String dateMax)
+    public Borrowing(int code, int codeUser, int codeBook, boolean returned, 
+            String dateBorrow, String dateReturn, String dateMax)
     {
         String[] date;
         
@@ -109,16 +110,27 @@ public class Borrowing
         this.dateReturn = dateReturn;
     }
     
-    public void printBorrowing()
+    public void printBorrowing(User user, Book book)
     {
         PrintStream pw = new PrintStream(System.out);
         
-        pw.print("Codigo: " + this.getCode() + " ");
-        pw.print("Codigo Usuario: " + this.getCodeUser() + " ");
-        pw.print("Codigo Livro: " + this.getCodeBook() + " ");
-        pw.print("Foi devolvido: " + this.isReturned() + " ");
-        pw.print("Data de emprestimo: " + dateFormat.format(dateBorrow.getTime()) + " ");
-        pw.println("Data de devolucao: " + dateFormat.format(dateReturn.getTime()));
+        pw.println("//--------------------------------------");   
+        pw.println("||Código: " + this.getCode());
+        
+        if (user != null)
+            pw.println("||Nome do usuário: " + user.getName());
+        
+        if (book != null)
+            pw.println("||Nome do Livro: " + book.getTitle());
+        
+        pw.println("||Foi devolvido: " + (this.isReturned() ? "Sim" : "Não"));
+        pw.println("||Data de empréstimo: " + dateFormat.format(dateBorrow.getTime()));
+        
+        if (this.isReturned())
+            pw.println("||Data de devolução: " + dateFormat.format(dateReturn.getTime()));
+        
+        pw.println("||Data máxima de devolução: " + dateFormat.format(dateMax.getTime()));
+        pw.println("\\\\--------------------------------------");
     }
     
     public void addFileBorrowing() 
@@ -147,6 +159,8 @@ public class Borrowing
             pw.print(dateFormat.format(this.getDateBorrow().getTime()));
             pw.print(",");
             pw.print(dateFormat.format(this.getDateReturn().getTime()));
+            pw.print(",");
+            pw.println(dateFormat.format(this.getDateMax().getTime()));
 
             // #Termina de gravar os itens no arquivo com uma quebra de linha no final do arquivo# //
             
