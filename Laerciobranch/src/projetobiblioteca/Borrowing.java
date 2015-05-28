@@ -22,24 +22,6 @@ public class Borrowing
     private Calendar dateReturn;
     private Calendar dateMax;
     
-    
-    // Caso haja atrasado, retorna o valor, se nao retorna zero
-    public int penalidade(List <Borrowing> borrowing, int codeUSer){
-        int late = 0;
-        //date1.getTime().getTime() - date2.getTime().getTime()
-        long diffLate;
-        long diffForward;
-        
-        for(Borrowing borrow : borrowing){
-            diffLate = borrow.get
-            if(borrow.getCodeUser() == codeUSer){
-                diffLate = borrow.g
-            }
-        }
-        
-        return 1;
-    }
-    
     public Borrowing(int code, int codeUser, int codeBook, boolean returned, String dateBorrow, String dateReturn, String dateMax)
     {
         String[] date;

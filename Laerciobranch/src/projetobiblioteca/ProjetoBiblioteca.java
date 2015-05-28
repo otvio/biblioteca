@@ -4,6 +4,7 @@ package projetobiblioteca;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import static java.lang.StrictMath.max;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -198,4 +199,70 @@ public class ProjetoBiblioteca
             
         return (borrowingslist);
     }
+    
+        // Caso haja atrasado, retorna o valor, se nao retorna zero
+    public long penalty(List <Borrowing> borrowing, int codeUSer, Calendar today){
+        long late = 0;
+        long greaterDiff = 0;
+        //date1.getTime().getTime() - date2.getTime().getTime()
+        long diffLate = 0;
+        long diffForward;
+        
+        // ordernar o vetor pela data de devolução do livro
+        
+        Collections.sort(borrowing, new Comparator<Borrowing>()
+        {
+            @Override
+            public int compare(Borrowing o1, Borrowing o2) 
+            {
+                return (o1.getDateReturn().compareTo(o2.getDateReturn()));
+            }
+        });
+        
+        // percorre a lista de emprestimos a procura do usuario que contem
+        for(Borrowing borrow : borrowing){
+            //caso encontre o usuario, entra na condição para efetuar o calculo
+            if(borrow.getCodeUser() == codeUSer){
+                // diffLate recebe o valor da diferença da data de retorno, com a data maxima que ele pode entregar o livro
+                diffLate = borrow.getDateReturn().getTime().getTime() - borrow.getDateMax().getTime().getTime();
+                // diffForward recebe o valor da diferença entre o dia atual e a data de retorno do livro
+                diffForward = today.getTime().getTime() - borrow.getDateReturn().getTime().getTime();
+                
+                // caso o livro seja entregue com atraso, entra nesta condição
+                if(diffLate > 0 && diffLate >= diffForward){
+                    greaterDiff = max(greaterDiff, diffForward); // recebe o valor da diferença máxima
+
+                    late += diffLate; // acumula as multas
+                }
+            }
+        }
+        return (late == 0) ? 0 : (late - greaterDiff);
+    }
+    
+    public List<Borrowing> borrowedBooks(List <Borrowing> borrowing, int codeUSer){
+        
+        // ordernar o vetor pela data de devolução do livro
+        
+        List <Borrowing> userBorrows = new ArrayList<>();
+        // ordena pelo codigo do livro
+        Collections.sort(userBorrows, new Comparator<Borrowing>()
+        {
+            @Override
+            public int compare(Borrowing o1, Borrowing o2) 
+            {
+                return (o1.getDateMax().compareTo(o2.getDateMax()));
+            }
+        });
+        // percorre a lista procurando determinado usuario
+        for(Borrowing borrow : borrowing){
+            // caso encontre o usuario, adiciona na lista
+            if(borrow.getCodeUser() == codeUSer){
+                userBorrows.add(borrow);
+            }
+        }
+        // retorna a lista de emprestimos de livros
+        return userBorrows;
+    }
 }
+
+
