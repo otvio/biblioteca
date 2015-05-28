@@ -2,28 +2,9 @@
 
 	TODO:
 	
-	
   se alguém começar a fazer algo, editar esse arquivo e indicar que está fazendo.
-
-
-- permitir que o usuário se identifique (cadastro e login)  (criar um usuário admin - senha 123456) (Feito - Ricardo)
- 
-  - permitir empréstimos (já inserir na listas de empréstimos) (Otavio fazendo)
-
-
-  - registrar os empréstimos, avisar quando está em atraso, registrar devoluções
-    Obs: como checar atraso: pegar a diferença entre a data atual e cada uma das datas de seus empréstimos¹,
-         ordenar de forma crescente e verificar se a primeira diferença é menor que zero; se sim, há 
-         livro com atraso de entrega.
   
-  
-  - calcular a suspensão em caso de atraso. Atraso na entrega do livro implica em suspensão (Laercio fazendo)
-    pela quantidade de dias atrasados
-  
-  
-  - para listar os empréstimos de um usuário específico na ordem de entrega é possível utilizar o que foi
-    citado em (¹).
-
+  - para listar os empréstimos de um usuário específico na ordem de entrega, ordenar pelo campo "dateMax".
 
 ##########################################################################################################
 
@@ -44,7 +25,7 @@ Obs: dateBorrow e dateReturn são no formato: "DD/MM/YYYY"
 
 
 Como será organizado os logins no arquivo:
-code,username,password
+code,username,password,codeUser
 
 
 ##########################################################################################################
