@@ -124,6 +124,14 @@ public class ProjetoBiblioteca
                     break;
                     
                 case "4":
+                    
+                    penalty = ProjetoBiblioteca.penalty(borrowingslist, user.getCode(), date);
+        
+                    if(penalty > 0){
+                        System.out.println("\nInfelizmente você tem penalidade e não pode emprestar livros de nosso acervo enquanto houver este débito\n");
+                        break;
+                    }
+                    
                     while(true){
                         ProjetoBiblioteca.borrowABook(borrowingslist, userBorrowings, bookslist, user, book, date);
                         System.out.println("Deseja Realizar outro empréstimo?\n(S) para sim e (N) para não:");
@@ -633,9 +641,10 @@ public class ProjetoBiblioteca
                 diffForward = (TimeUnit.DAYS.convert(diffForward, TimeUnit.MILLISECONDS));
                 
                 // caso o livro seja entregue com atraso, entra nesta condição
+                
+                
                 if(diffLate > 0 && diffLate >= diffForward){
                     greaterDiff = max(greaterDiff, diffForward); // recebe o valor da diferença máxima
-                    greaterDiff = (TimeUnit.DAYS.convert(greaterDiff, TimeUnit.MILLISECONDS));
                     late += diffLate; // acumula as multas
                 }
             }
@@ -716,6 +725,7 @@ public class ProjetoBiblioteca
     
     public static void borrowABook(List <Borrowing> borrowingslist, List<Borrowing> userBorrowings, List<Book> bookslist,
                                       User user, Book book, Calendar date){
+     
         
         System.out.println("\nDigite o titulo do livro solicitado:");
         
