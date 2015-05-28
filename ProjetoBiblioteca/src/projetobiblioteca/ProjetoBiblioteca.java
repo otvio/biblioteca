@@ -76,12 +76,23 @@ public class ProjetoBiblioteca
         }
     }
     
-    public static void newBorrowing(List<Borrowing> borrowingslist, List<Borrowing> userBorrowings, User user, Book book, Calendar current)
+    public static void newBorrowing(List<Borrowing> borrowingslist, 
+            List<Borrowing> userBorrowings, User user, Book book, Calendar current)
     {
+        sortBorrowingsList(borrowingslist);
+        
         int code = borrowingslist.get(0).getCode() + 1;
-        //Borrowing b = new Borrowing(code, user.getCode(), book.getCode(), false, current.clone(), );
-        //borrowingslist.add(b);
-        //userBorrowings.add(b);
+        Calendar dateMax = (Calendar) current.clone();
+        dateMax.add(Calendar.DAY_OF_MONTH, user.getDaysLimit());
+
+        Borrowing b = new Borrowing(
+                code, user.getCode(), book.getCode(), false, 
+                dateFormat.format(current.getTime()), "00/00/0000", 
+                dateFormat.format(dateMax.getTime())
+        );
+        
+        borrowingslist.add(b);
+        userBorrowings.add(b);
         
         sortBorrowingsList(borrowingslist);
         sortBorrowingsList(userBorrowings);

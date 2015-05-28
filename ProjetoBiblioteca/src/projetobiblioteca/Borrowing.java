@@ -22,7 +22,8 @@ public class Borrowing
     private Calendar dateMax;
 
     
-    public Borrowing(int code, int codeUser, int codeBook, boolean returned, String dateBorrow, String dateReturn, String dateMax)
+    public Borrowing(int code, int codeUser, int codeBook, boolean returned, 
+            String dateBorrow, String dateReturn, String dateMax)
     {
         String[] date;
         
@@ -118,6 +119,7 @@ public class Borrowing
         pw.print("Codigo Livro: " + this.getCodeBook() + " ");
         pw.print("Foi devolvido: " + this.isReturned() + " ");
         pw.print("Data de emprestimo: " + dateFormat.format(dateBorrow.getTime()) + " ");
+        pw.print("Data maxima de devolucao: " + dateFormat.format(dateMax.getTime()) + " ");
         pw.println("Data de devolucao: " + dateFormat.format(dateReturn.getTime()));
     }
     
@@ -147,6 +149,8 @@ public class Borrowing
             pw.print(dateFormat.format(this.getDateBorrow().getTime()));
             pw.print(",");
             pw.print(dateFormat.format(this.getDateReturn().getTime()));
+            pw.print(",");
+            pw.print(dateFormat.format(this.getDateMax().getTime()));
 
             // #Termina de gravar os itens no arquivo com uma quebra de linha no final do arquivo# //
             
