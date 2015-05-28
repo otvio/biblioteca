@@ -71,13 +71,32 @@ public abstract class User
     {
         PrintStream pw = new PrintStream(System.out);
         
-        pw.print("Codigo: " + this.getCode() + " ");
-        pw.print("Nome: " + this.getName() + " ");
-        pw.print("CPF: " + this.getCPF() + " ");
-        pw.print("RG: " + this.getRG() + " ");
-        pw.print("Limite de livros: " + this.getBookLimit() + " ");
-        pw.print("Limite de dias: " + this.getDaysLimit() + " ");
-        pw.println("Tipo: " + this.getType());
+        String mytype = "--Não definido--";
+        
+        switch (this.getType())
+        {
+            case "T":
+                mytype = "Professor";
+                break;
+                
+            case "S":
+                mytype = "Estudante";
+                break;
+                
+            case "P":
+                mytype = "Pessoa (Comunidade)";
+                break;
+        }
+        
+        pw.println("//--------------------------------------");
+        pw.println("||Código: " + this.getCode());
+        pw.println("||Nome: " + this.getName());
+        pw.println("||CPF: " + this.getCPF());
+        pw.println("||RG: " + this.getRG());
+        pw.println("||Limite de livros: " + this.getBookLimit());
+        pw.println("||Limite de dias: " + this.getDaysLimit());
+        pw.println("||Tipo: " + mytype);
+        pw.println("\\\\--------------------------------------");
     }
     
     public void setType(String type) {

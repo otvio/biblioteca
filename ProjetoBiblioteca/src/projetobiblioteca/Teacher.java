@@ -8,5 +8,4 @@ public class Teacher extends User
     {
         super(name, cpf, rg, 6 , 60, code, "T");
     }
-    
 }

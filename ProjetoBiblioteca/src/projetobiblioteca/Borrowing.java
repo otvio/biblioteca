@@ -110,17 +110,27 @@ public class Borrowing
         this.dateReturn = dateReturn;
     }
     
-    public void printBorrowing()
+    public void printBorrowing(User user, Book book)
     {
         PrintStream pw = new PrintStream(System.out);
         
-        pw.print("Codigo: " + this.getCode() + " ");
-        pw.print("Codigo Usuario: " + this.getCodeUser() + " ");
-        pw.print("Codigo Livro: " + this.getCodeBook() + " ");
-        pw.print("Foi devolvido: " + this.isReturned() + " ");
-        pw.print("Data de emprestimo: " + dateFormat.format(dateBorrow.getTime()) + " ");
-        pw.print("Data maxima de devolucao: " + dateFormat.format(dateMax.getTime()) + " ");
-        pw.println("Data de devolucao: " + dateFormat.format(dateReturn.getTime()));
+        pw.println("//--------------------------------------");   
+        pw.println("||Código: " + this.getCode());
+        
+        if (user != null)
+            pw.println("||Nome do usuário: " + user.getName());
+        
+        if (book != null)
+            pw.println("||Nome do Livro: " + book.getTitle());
+        
+        pw.println("||Foi devolvido: " + (this.isReturned() ? "Sim" : "Não"));
+        pw.println("||Data de empréstimo: " + dateFormat.format(dateBorrow.getTime()));
+        
+        if (this.isReturned())
+            pw.println("||Data de devolução: " + dateFormat.format(dateReturn.getTime()));
+        
+        pw.println("||Data máxima de devolução: " + dateFormat.format(dateMax.getTime()));
+        pw.println("\\\\--------------------------------------");
     }
     
     public void addFileBorrowing() 
@@ -150,7 +160,7 @@ public class Borrowing
             pw.print(",");
             pw.print(dateFormat.format(this.getDateReturn().getTime()));
             pw.print(",");
-            pw.print(dateFormat.format(this.getDateMax().getTime()));
+            pw.println(dateFormat.format(this.getDateMax().getTime()));
 
             // #Termina de gravar os itens no arquivo com uma quebra de linha no final do arquivo# //
             

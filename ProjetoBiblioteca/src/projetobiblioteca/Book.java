@@ -70,16 +70,18 @@ public class Book
     
     public void printBook()
     {
-        PrintStream pw = new PrintStream(System.out); // cria um PrintStream que irá escrever na tela
+        PrintStream pw = new PrintStream(System.out);
             
-        pw.print("Codigo:" + this.getCode() + " ");
-        pw.print("Titulo:" + this.getTitle() + " ");
-        pw.print("Autor:" + this.getAuthor() + " ");
-        pw.print("Edicao:" + this.getIssue() + " ");
-        pw.print("Tipo:" + this.getType() + " ");
-        pw.print("Paginas:" + this.getPages() + " ");
-        pw.print("Quantidade disponivel:" + this.getAvailable() + " ");
-        pw.println("Quantidade total:" + this.getQuantity());
+        pw.println("//--------------------------------------");   
+        pw.println("||Código: " + this.getCode());
+        pw.println("||Título: " + this.getTitle());
+        pw.println("||Autor: " + this.getAuthor());
+        pw.println("||Edição: " + this.getIssue());
+        pw.println("||Tipo: " + this.getType());
+        pw.println("||Quantidade de páginas: " + this.getPages());
+        pw.println("||Quantidade disponível: " + this.getAvailable());
+        pw.println("||Quantidade total: " + this.getQuantity());
+        pw.println("\\\\--------------------------------------");
     }
     
     public void addFileBook() 

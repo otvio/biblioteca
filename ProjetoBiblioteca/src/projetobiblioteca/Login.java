@@ -79,7 +79,7 @@ public class Login
             pw.print(",");
             pw.print(this.getPassword());
             pw.print(",");
-            pw.print(this.getCodeUser());
+            pw.println(this.getCodeUser());
             
             // #Termina de gravar os itens no arquivo com uma quebra de linha no final do arquivo# //
             

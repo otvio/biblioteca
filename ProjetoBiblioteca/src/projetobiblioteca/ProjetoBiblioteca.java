@@ -16,9 +16,6 @@ import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 import static java.lang.StrictMath.max;
 
-//SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-//Calendar teste = new GregorianCalendar(2012, 1, 29);
-//System.out.println(dateFormat.format(teste.getTime()));
 
 public class ProjetoBiblioteca
 {
@@ -35,7 +32,7 @@ public class ProjetoBiblioteca
         List<Login> loginlist = new ArrayList<>();
         
         List<Borrowing> borrowingslist = new ArrayList<>();
-        List<Borrowing> userBorrowings = new ArrayList<>();
+        List<Borrowing> userBorrowings;
         
         Calendar date;
         User user;
@@ -60,21 +57,6 @@ public class ProjetoBiblioteca
             buffReader = new BufferedReader(new FileReader("borrowings.txt"));
             borrowingslist = getBorrowingsList(buffReader);
             buffReader.close();
-
-            
-            // excluindo todos arquivos para serem reescritos corretamente (atualizados) no fim do programa
-            
-            File file = new File("users.txt");
-            file.delete();
-            
-            file = new File("logins.txt");
-            file.delete();
-
-            file = new File("borrowings.txt");
-            file.delete();
-
-            file = new File("books.txt");
-            file.delete();
             
         } catch (Exception ex) { }
         
@@ -98,8 +80,8 @@ public class ProjetoBiblioteca
             
             switch (option)
             {
-                case "1": // (1).  Visualizar todos livros
-                    
+                case "1": 
+                    /*--------- (1).  Visualizar todos livros  ---------*/
                     System.out.println("\n\n\t||-----------------------------------------||"
                                        + "\n\t||   Lista de todos livros na biblioteca   ||"
                                        + "\n\t||-----------------------------------------||\n\n");
@@ -110,10 +92,33 @@ public class ProjetoBiblioteca
                     System.out.println("\n\n:::   Listagem concluída com SUCESSO  :::\n");
                     
                     break;
+
                 case "2":
+                    /*--------- (2).  Visualizar histórico de empréstimos pessoais  ---------*/
+                    System.out.println("\n\n\t||-------------------------------------------------||"
+                                       + "\n\t   Histórico de empréstimos do usuário: \n\t\t\t" + user.getName()
+                                       + "\n\t||-------------------------------------------------||\n\n");
+                    
+                    for (Borrowing b : userBorrowings)
+                        b.printBorrowing(user, bookslist.get(b.getCodeBook()));
+                    
+                    System.out.println("\n\n:::   Listagem concluída com SUCESSO  :::\n");
+                    
                     break; 
-                case "3":
+                    
+                case "3": 
+                    /*--------- (3).  Visualizar lista de empréstimos pessoais (ainda não devolvidos)  ---------*/
+                    System.out.println("\n\n\t||-------------------------------------------------||"
+                                       + "\n\t   Lista de empréstimos ainda não devolvidos \n\t\t do usuário: " + user.getName()
+                                       + "\n\t||-------------------------------------------------||\n\n");
+                    
+                    for (Borrowing b : userBorrowings)
+                        if (!b.isReturned())
+                            b.printBorrowing(user, bookslist.get(b.getCodeBook()));
+                    
+                    System.out.println("\n\n:::   Listagem concluída com SUCESSO  :::\n");
                     break;
+                    
                 case "4":
                     break;
                 case "5":
@@ -121,6 +126,16 @@ public class ProjetoBiblioteca
                 case "6":
                     break;
                 case "7":
+                    /*--------- (7).  Visualizar todos usuários do sistema  ---------*/
+                    System.out.println("\n\n\t||-------------------------------------------||"
+                                       + "\n\t||   Lista de todos usuários da biblioteca   ||"
+                                       + "\n\t||-------------------------------------------||\n\n");
+                    
+                    for (User u : userlist)
+                        u.printUser();
+                    
+                    System.out.println("\n\n:::   Listagem concluída com SUCESSO  :::\n");
+                    
                     break;
                 case "8":
                     break;
@@ -130,13 +145,27 @@ public class ProjetoBiblioteca
             
             if (!("10").equals(option))
             {
-                System.out.println("\nPressione qualquer tecla para continuar...");
+                System.out.println("\nPressione ENTER para continuar...");
                 option = input.nextLine();                
                 option = (option.equals("10")) ? "-" : option;
             }
         }
         
         /*---------- FINALIZANDO PROGRAMA ----------*/
+        
+        // excluindo todos arquivos para serem reescritos corretamente (atualizados) no fim do programa
+            
+            File file = new File("users.txt");
+            file.delete();
+            
+            file = new File("logins.txt");
+            file.delete();
+
+            file = new File("borrowings.txt");
+            file.delete();
+
+            file = new File("books.txt");
+            file.delete();
         
         // salvando as listas nos arquivos
         
@@ -163,12 +192,12 @@ public class ProjetoBiblioteca
     {
         System.out.println("(1).  Visualizar todos livros");
         System.out.println("(2).  Visualizar histórico de empréstimos pessoais");
-        System.out.println("(3).  Listar empréstimos pessoais (não devolvidos)");
+        System.out.println("(3).  Visualizar lista de empréstimos pessoais (ainda não devolvidos)");
         System.out.println("(4).  Realizar empréstimo");
         System.out.println("(5).  Devolver livro");
         System.out.println("(6).  Verificar situação de atraso");
         System.out.println("(7).  Visualizar todos usuários do sistema");
-        System.out.println("(8).  Visualizar todos empréstimos do sistema");
+        System.out.println("(8).  Visualizar histórico de empréstimos do sistema");
         System.out.println("(9).  Adicionar livro no estoque");
         System.out.println("(10). Sair do sistema");
     }

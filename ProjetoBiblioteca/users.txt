@@ -1,1 +1,3 @@
-0,admin,noCPF,noRG,6,60,T
+0,adminLORDedalus,admin,admin,6,60,T
+1,Ricardo Silva,928.182.123-28,29.192.392-5,6,60,T
+2,Laercio Junior,111.222.333-44,55.666.777-8,2,15,P
