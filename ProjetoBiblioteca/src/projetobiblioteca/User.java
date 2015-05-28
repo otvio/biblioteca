@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintStream;
 import java.io.PrintWriter;
-import java.util.Scanner;
 
 
 public abstract class User
@@ -37,8 +36,8 @@ public abstract class User
     {
         try
         {
-            File fp = new File("users.txt"); // variavel que 'representara' o arquivo book
-            FileWriter fw = new FileWriter(fp, true); // empacotar o file para que possa escrever nele, e adicionar o campo true para indicar append
+            File fp = new File("users.txt");
+            FileWriter fw = new FileWriter(fp, true);
             PrintWriter pw = new PrintWriter(fw); // cria um PrintWriter que irá escrever no arquivo
 
             if(fp.exists() == false){ // caso o arquivo nao exista, cria um arquivo
@@ -138,29 +137,5 @@ public abstract class User
     public int getCode() 
     {
         return code;
-    }
-    
-    public void insertUser(){
-        Scanner sc = new Scanner(System.in);
-        
-        String input = sc.nextLine();
-        
-        if(input.equals("Teacher")){
-            Teacher t = new Teacher(sc.nextLine(), sc.nextLine(), sc.nextLine(), 6, 60, 0);
-            //createUser(this);
-        }
-        else if(input.equals("Student")){
-            Student s = new Student(sc.nextLine(), sc.nextLine(), sc.nextLine(), 4, 15, 0);
-        }
-        else if(input.equals("Person")){
-            Person p = new Person(sc.nextLine(), sc.nextLine(), sc.nextLine(), 2, 15, 0);
-        }
-    }
-    
-    public static void main (String [] args){
-        
-        Teacher t = new Teacher("0", "0", "0", 0, 0, 0);
-        
-        t.insertUser();
     }
 }
