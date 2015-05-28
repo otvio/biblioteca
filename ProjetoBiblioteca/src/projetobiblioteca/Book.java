@@ -77,7 +77,7 @@ public class Book
         pw.println("||Título: " + this.getTitle());
         pw.println("||Autor: " + this.getAuthor());
         pw.println("||Edição: " + this.getIssue());
-        pw.println("||Tipo: " + this.getType());
+        pw.println("||Tipo: " +((this.getType().equals("T")) ? "Texto" : "Geral"));
         pw.println("||Quantidade de páginas: " + this.getPages());
         pw.println("||Quantidade disponível: " + this.getAvailable());
         pw.println("||Quantidade total: " + this.getQuantity());

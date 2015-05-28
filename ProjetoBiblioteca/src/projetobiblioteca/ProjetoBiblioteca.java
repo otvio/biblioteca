@@ -36,6 +36,7 @@ public class ProjetoBiblioteca
         
         Calendar date;
         User user;
+        Book book;
         
         Scanner input;
         String option = "-";
@@ -151,7 +152,18 @@ public class ProjetoBiblioteca
                     System.out.println("\n\n:::   Listagem concluída com SUCESSO  :::\n");
                     
                     break;
+                    
                 case "9":
+                    
+                    /*--------- (9).  Adicionar livro novo na biblioteca  ---------*/
+                    System.out.println("\n\n\t||----------------------------------------||"
+                                       + "\n\t||   Adicionar livro novo na biblioteca   ||"
+                                       + "\n\t||----------------------------------------||\n\n");
+                    
+                    askBook(bookslist, input);
+                    
+                    System.out.println("\n\n:::   Inserção concluída com SUCESSO  :::\n");
+                    
                     break;                            
             }
             
@@ -210,8 +222,54 @@ public class ProjetoBiblioteca
         System.out.println("(6).  Verificar situação de atraso");
         System.out.println("(7).  Visualizar todos usuários da biblioteca");
         System.out.println("(8).  Visualizar histórico de empréstimos da biblioteca");
-        System.out.println("(9).  Adicionar livro no estoque");
+        System.out.println("(9).  Adicionar livro novo na biblioteca");
         System.out.println("(10). Sair");
+    }
+    
+    public static Book askBook(List<Book> bookslist, Scanner input)
+    {
+        int code = (!bookslist.isEmpty()) ? (bookslist.get(bookslist.size() - 1).getCode() + 1) : 0;
+        
+        int issue, pages, quantity;
+        String title, author, type;
+        
+        Book book;
+        
+        printHeader();
+        
+        System.out.println("Digite os dados do livro conforme o solicitado.");
+            
+        System.out.print("Título: ");
+        title = input.nextLine();
+
+        System.out.print("Autor: ");
+        author = input.nextLine();
+
+        System.out.print("Edição: ");
+        issue = input.nextInt();
+        
+        System.out.println("\nO livro se encaixa em qual categoria abaixo: ");
+        System.out.println("   (1). Livro-texto");
+        System.out.println("   (2). Geral");
+        
+        do
+        {
+            type = input.nextLine();
+        }while ((!type.equals("1")) && (!type.equals("2")));
+
+        type = (type.equals("1")) ? "T" : "G";
+
+        System.out.print("Quantidade de páginas: ");
+        pages = input.nextInt();
+        
+        System.out.print("Quantidade total de cópias: ");
+        quantity = input.nextInt();
+        
+        book = new Book(pages, issue, code, title, author, type, quantity, quantity);
+        
+        bookslist.add(book);
+        
+        return (book);
     }
     
     public static Calendar askDate(Scanner input)
