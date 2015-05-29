@@ -23,6 +23,10 @@ public class ProjetoBiblioteca
     
     public static void main(String[] args)
     {
+        int codeBook;
+        long penalty;
+        boolean readOnly;
+        
         BufferedReader buffReader;
         
         List<User> userlist = new ArrayList<>();
@@ -33,14 +37,15 @@ public class ProjetoBiblioteca
         List<Borrowing> userBorrowings;
         
         Calendar date;
+        Calendar today = Calendar.getInstance();
+        
         User user;
         Book book = null;
         
         Scanner input;
         String option = "-";
-        long penalty;
         String borrow;
-        int codeBook;
+        
         
         try
         {
@@ -65,9 +70,10 @@ public class ProjetoBiblioteca
         input = new Scanner (System.in);
         
         date = askDate(input);
+        readOnly = (date.compareTo(today) < 0);
+        
         user = askUser(userlist, loginlist, input);
         userBorrowings = borrowedBooks(borrowingslist, user.getCode());
-        
         
         //loop principal do programa: checa a opcao escolhida pelo usuario e executa de acordo
         while (!("10").equals(option))
@@ -81,6 +87,15 @@ public class ProjetoBiblioteca
                     && !option.equals("4") && !option.equals("5") && !option.equals("6") 
                     && !option.equals("7") && !option.equals("8") && !option.equals("9")
                     && !option.equals("10"));
+            
+            if ((readOnly) && (option.equals("4") || option.equals("5") || option.equals("9")))
+            {
+                System.out.println("\n::: Opção desabilitada quando acessada no passado :::\n");
+                System.out.println("\nPressione ENTER para continuar...");
+                option = input.nextLine();                
+                option = (option.equals("10")) ? "-" : option;
+                continue;
+            }
             
             switch (option)
             {
@@ -160,21 +175,10 @@ public class ProjetoBiblioteca
                     
                     if (!userBorrowings.isEmpty() && !bookslist.isEmpty())
                     {
-//                        for(int i = 0; i < bookslist.size(); i++){
-//                            if(bookslist.get(i).getTitle().equals(borrow))
-//                            {
-//                                for(Borrowing b: userBorrowings){
-//                                    if(bookslist.get(i).getCode() == b.getCodeBook() && b.isReturned() == false){
-//                                        codeBook = bookslist.get(i).getCode();
-//                                        break;
-//                                    }
-//                                }
-//                                    
-//                            }
-//                        }
-                        
-                        for(Borrowing b: userBorrowings){
-                            if(bookslist.get(b.getCodeBook()).getTitle().equals(borrow) && b.isReturned() == false){
+                        for(Borrowing b: userBorrowings)
+                        {
+                            if(bookslist.get(b.getCodeBook()).getTitle().equals(borrow) && b.isReturned() == false)
+                            {
                                 System.out.println(bookslist.get(b.getCodeBook()).getTitle());
                                 codeBook = b.getCodeBook();
                                 System.out.println(codeBook);
@@ -189,15 +193,18 @@ public class ProjetoBiblioteca
                         break;
                     }
                     
-                    ProjetoBiblioteca.returnABook(borrowingslist, userBorrowings, date, codeBook, user.getCode(), userlist, bookslist);
-                    for(int i = 0 ; i<bookslist.size(); i++)
+                    returnABook(borrowingslist, userBorrowings, 
+                            date, codeBook, user.getCode(), userlist, bookslist);
+                    
+                    for (Book bookslist1 : bookslist) 
                     {
-                        if(bookslist.get(i).getCode()== codeBook)
+                        if (bookslist1.getCode() == codeBook) 
                         {
-                            bookslist.get(i).setAvailable(bookslist.get(i).getAvailable()+1);
+                            bookslist1.setAvailable(bookslist1.getAvailable() + 1);
                             break;
-                        }                            
+                        }
                     }
+                    
                     System.out.println("\nDevolução efetuada com sucesso.\n");
                     
                     break;
@@ -388,7 +395,8 @@ public class ProjetoBiblioteca
             System.out.print("   Ano: ");
             year = input.nextInt();
             System.out.println("");
-            return(new GregorianCalendar(year, month, day));
+
+            return (new GregorianCalendar(year, month, day));
         }
     }
     
@@ -852,23 +860,5 @@ public class ProjetoBiblioteca
             borrowing.setDateReturn(date);
             borrowing.setReturned(true);
         }
-        else
-            System.out.println("borrowing == null");
-        
-//        for(int i = 0; i < userborrowings.size(); i++){
-//            if(userborrowings.get(i).getCode() == codeBook && userborrowings.get(i).getCodeUser() == codeUser && userborrowings.get(i).isReturned() == false){
-//                System.out.println(userborrowings.get(i).getCode());
-//                userborrowings.get(i).setDateReturn(date);
-//                userborrowings.get(i).setReturned(true);
-//            }
-//        }
-       
-//        for(int i = 0; i < borrowingslist.size(); i++){
-//            if(borrowingslist.get(i).getCode() == codeBook && borrowingslist.get(i).getCodeUser()== codeUser && borrowingslist.get(i).isReturned() == false){
-//                System.out.println(borrowingslist.get(i).getCode());
-//                borrowingslist.get(i).setDateReturn(date);
-//                borrowingslist.get(i).setReturned(true);
-//            }
-//        }
     }
 }
