@@ -235,7 +235,7 @@ public class ProjetoBiblioteca
                     System.out.println("\n\n\t||--------------------------------------------||"
                                        + "\n\t||   Histórico de empréstimos da biblioteca   ||"
                                        + "\n\t||--------------------------------------------||\n\n");
-                    
+                    sortBorrowingsList(borrowingslist);
                     for (Borrowing b : borrowingslist)
                         b.printBorrowing(userlist.get(b.getCodeUser()), bookslist.get(b.getCodeBook()));
                     
@@ -705,7 +705,8 @@ public class ProjetoBiblioteca
                     greaterDiff = max(greaterDiff, diffForward); // recebe o valor da diferença máxima
                     late += diffLate; // acumula as multas
                 }
-                else if(diffMiddle > 0){
+                
+                else if(diffMiddle > 0 && borrow.isReturned() == false){
                     late += diffMiddle;
                 }
             }

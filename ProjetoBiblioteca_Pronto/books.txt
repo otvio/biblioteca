@@ -1,4 +1,4 @@
 0,Um Curso de Calculo 1,Guidorizzi,2,T,335,2,3
 1,Livro de Figuras,Laercio de Oliveira Jr,1,G,293,1,1
-2,Senhor dos Aneis,J.R.R. Tolkien,7,G,8001,2,3
+2,Senhor dos Aneis,J.R.R. Tolkien,7,G,8001,3,3
 3,O Hobbit,J.R.R. Tokien,2,G,8000,1,2
