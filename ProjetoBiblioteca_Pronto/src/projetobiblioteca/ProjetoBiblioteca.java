@@ -150,7 +150,7 @@ public class ProjetoBiblioteca
                     
                 case "4":
                     
-                    penalty = ProjetoBiblioteca.penalty(borrowingslist, user.getCode(), date);
+                    penalty = ProjetoBiblioteca.penalty(borrowingslist, user.getCode(), date, user);
         
                     if(penalty > 0){
                         System.out.println("\nInfelizmente você tem penalidade de " + penalty + 
@@ -179,9 +179,7 @@ public class ProjetoBiblioteca
                         {
                             if(bookslist.get(b.getCodeBook()).getTitle().equals(borrow) && b.isReturned() == false)
                             {
-                                System.out.println(bookslist.get(b.getCodeBook()).getTitle());
                                 codeBook = b.getCodeBook();
-                                System.out.println(codeBook);
                                 break;
                             }
                         }
@@ -210,7 +208,7 @@ public class ProjetoBiblioteca
                     break;
                 case "6":
                     
-                    penalty = ProjetoBiblioteca.penalty(borrowingslist,user.getCode(), date);
+                    penalty = ProjetoBiblioteca.penalty(borrowingslist,user.getCode(), date, user);
                     
                     System.out.println("\nVocê tem " + penalty + " dias de penalidade");
                     
@@ -664,12 +662,13 @@ public class ProjetoBiblioteca
     }
     
     // Caso haja atrasado, retorna o valor, se nao retorna zero
-    public static long penalty(List <Borrowing> borrowing, int codeUSer, Calendar today)
+    public static long penalty(List <Borrowing> borrowing, int codeUSer, Calendar today, User user)
     {
         long late = 0;
         long greaterDiff = 0;
         //date1.getTime().getTime() - date2.getTime().getTime()
         long diffLate;
+        long diffMiddle;
         long diffForward;
         
         // ordernar o vetor pela data de devolução do livro
@@ -695,12 +694,19 @@ public class ProjetoBiblioteca
                 diffForward = today.getTime().getTime() - borrow.getDateReturn().getTime().getTime();
                 diffForward = (TimeUnit.DAYS.convert(diffForward, TimeUnit.MILLISECONDS));
                 
+                diffMiddle = today.getTime().getTime() - borrow.getDateMax().getTime().getTime();
+                diffMiddle = (TimeUnit.DAYS.convert(diffMiddle, TimeUnit.MILLISECONDS));
+                //System.out.println(diffMiddle);
                 // caso o livro seja entregue com atraso, entra nesta condição
                 
                 
                 if(diffLate > 0 && diffLate >= diffForward){
+                    
                     greaterDiff = max(greaterDiff, diffForward); // recebe o valor da diferença máxima
                     late += diffLate; // acumula as multas
+                }
+                else if(diffMiddle > 0){
+                    late += diffMiddle;
                 }
             }
         }
