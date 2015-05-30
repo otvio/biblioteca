@@ -193,21 +193,25 @@ public class ProjetoBiblioteca
                         break;
                     }
                     
-                    returnABook(borrowingslist, userBorrowings, 
-                            date, codeBook, user.getCode(), userlist, bookslist);  // É chamado o método para efetuar a devolução
-                    
-                    for (Book bookslist1 : bookslist)   // Loop para devolver a quantidade de livros disponiveis na bibliteca após a devolução
+                    if (returnABook(borrowingslist, userBorrowings, 
+                            date, codeBook, user.getCode(), userlist, bookslist) == true)  // É chamado o método para efetuar a devolução
                     {
-                        if (bookslist1.getCode() == codeBook) 
+                        for (Book bookslist1 : bookslist)   // Loop para devolver a quantidade de livros disponiveis na bibliteca após a devolução
                         {
-                            bookslist1.setAvailable(bookslist1.getAvailable() + 1);
-                            break;
+                            if (bookslist1.getCode() == codeBook) 
+                            {
+                                bookslist1.setAvailable(bookslist1.getAvailable() + 1);
+                                break;
+                            }
                         }
+
+                        System.out.println("\n::: Devolução efetuada com SUCESSO. :::\n");
                     }
-                    
-                    System.out.println("\nDevolução efetuada com sucesso.\n");
+                    else
+                        System.out.println("\n::: Operação NÃO REALIZADA com sucesso! :::\n");
                     
                     break;
+                    
                 case "6":
                     
                     penalty = ProjetoBiblioteca.penalty(borrowingslist,user.getCode(), date, user); // Verifica a situação  de atraso do usuário
@@ -865,7 +869,7 @@ public class ProjetoBiblioteca
         }
     }
     
-    public static void returnABook(List <Borrowing> borrowingslist, List <Borrowing> userborrowings, Calendar date, int codeBook, int codeUser, List <User> userlist, List <Book> bookslist)
+    public static boolean returnABook(List <Borrowing> borrowingslist, List <Borrowing> userborrowings, Calendar date, int codeBook, int codeUser, List <User> userlist, List <Book> bookslist)
     {  // Método para a devolução de um livro
        
         Borrowing borrowing = null;
@@ -877,8 +881,17 @@ public class ProjetoBiblioteca
         }
         if (borrowing != null)
         {
-            borrowing.setDateReturn(date);  // Seta a data de devolução 
-            borrowing.setReturned(true);    // E seta o retorno como verdadeiro
+            if (date.compareTo(borrowing.getDateBorrow()) < 0) // se está visitando o sistema no passado
+            {
+            }
+            else
+            {
+                borrowing.setDateReturn(date);  // Seta a data de devolução 
+                borrowing.setReturned(true);    // E seta o retorno como verdadeiro
+                
+                return (true);
+            }
         }
+        return (false);
     }
 }
