@@ -19,52 +19,61 @@ public class Book
     private int available;
         
     public Book(int pages, int issue, int code, String title, String author, String type, 
-                int quantity, int available)
+                int quantity, int available)      // construtor para o objeto livro
     {
         
-        this.pages = pages;
-        this.issue = issue;
-        this.code = code;
-        this.title = title;
-        this.author = author;
-        this.type = type;
-        this.available = available;
-        this.quantity = quantity;
+        this.pages = pages;                 //número de páginas passados para o construtor
+        this.issue = issue;                 // edição do livro
+        this.code = code;                   // código do livro
+        this.title = title;                 // título do livro
+        this.author = author;               // autor que escreveu o livro
+        this.type = type;                   // tipo do livro, texto ou geral
+        this.available = available;         // Disponibilidade do livro 
+        this.quantity = quantity;           // Quantidade desse livro
     }
 
-    public void setAvailable(int available) {
+    public void setAvailable(int available)
+    {
         this.available = available;
     }
 
-    public int getQuantity() {
+    public int getQuantity()
+    {
         return quantity;
     }
 
-    public int getAvailable() {
+    public int getAvailable()
+    {
         return available;
     }
 
-    public String getType() {
+    public String getType()
+    {
         return type;
     }
     
-    public int getPages() {
+    public int getPages()
+    {
         return pages;
     }
 
-    public int getIssue() {
+    public int getIssue()
+    {
         return issue;
     }
 
-    public int getCode() {
+    public int getCode()
+    {
         return code;
     }
 
-    public String getTitle() {
+    public String getTitle()
+    {
         return title;
     }
     
-    public String getAuthor() {
+    public String getAuthor() 
+    {
         return author;
     }
     
@@ -86,12 +95,14 @@ public class Book
     
     public void addFileBook() 
     {
-        try{
+        try
+        {
             File fp = new File("books.txt"); // variavel que 'representara' o arquivo book
             FileWriter fw = new FileWriter(fp, true); // empacotar o file para que possa escrever nele, e adicionar o campo true para indicar append
             PrintWriter pw = new PrintWriter(fw); // cria um PrintWriter que irá escrever no arquivo
 
-            if(fp.exists() == false){ // caso o arquivo nao exista, cria um arquivo
+            if(fp.exists() == false) // caso o arquivo nao exista, cria um arquivo
+            { 
                 System.out.println("NAO EXISTE ARQUIVO");
                 fp.createNewFile();
             }

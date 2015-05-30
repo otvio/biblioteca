@@ -7,12 +7,12 @@ import java.io.PrintWriter;
 
 public class Login 
 {
-    private String user;
-    private String password;
-    private int code;
-    private int codeUser;
+    private String user;            // String para armazenar o usuário
+    private String password;        // String para armazenar o password
+    private int code;               // Int para armazenar o código de empréstimo
+    private int codeUser;           // Int para armazenar o código do usuário 
 
-    public Login(int code, String user, String password, int codeUser)
+    public Login(int code, String user, String password, int codeUser) // Construtor para pegar as informações do usuário
     {        
         this.user = user;
         this.password = password;
@@ -20,6 +20,8 @@ public class Login
         this.codeUser = codeUser;
     }
 
+    // Getters e setters para  o objeto usuário //
+    
     public int getCodeUser() 
     {
         return codeUser;
@@ -60,14 +62,16 @@ public class Login
         this.code = code;
     }  
     
-    public void addFileLogin() 
+    public void addFileLogin()  // Método para adicionar o usuário no arquivo
     {
-        try{
+        try
+        {
             File fp = new File("logins.txt");
             FileWriter fw = new FileWriter(fp, true);
-            PrintWriter pw = new PrintWriter(fw); // cria um PrintWriter que irá escrever no arquivo
+            PrintWriter pw = new PrintWriter(fw); // Cria um PrintWriter que irá escrever no arquivo
 
-            if(fp.exists() == false){ // caso o arquivo nao exista, cria um arquivo
+            if(fp.exists() == false)              // Caso o arquivo nao exista, cria um arquivo
+            { 
                 fp.createNewFile();
             }
             

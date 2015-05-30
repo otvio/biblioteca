@@ -9,7 +9,7 @@ import java.io.PrintWriter;
 
 public abstract class User
 {
-    private String name;
+    private String name;   
     private String CPF;
     private String RG;
     private String type;
@@ -40,11 +40,13 @@ public abstract class User
             FileWriter fw = new FileWriter(fp, true);
             PrintWriter pw = new PrintWriter(fw); // cria um PrintWriter que irá escrever no arquivo
 
-            if(fp.exists() == false){ // caso o arquivo nao exista, cria um arquivo
+            if(fp.exists() == false)  // caso o arquivo nao exista, cria um arquivo
+            { 
                 fp.createNewFile();
             }
 
-            pw.print(this.getCode());
+            // Os comandos abaixo salvam os dados no arquivo, após cada dado adicionado é acrescentada uma virgula para separa-los.
+            pw.print(this.getCode());  
             pw.print(",");
             pw.print(this.getName());
             pw.print(",");
@@ -67,7 +69,7 @@ public abstract class User
         }
     }
     
-    public void printUser()
+    public void printUser()      // Método que define o tipo do usuário
     {
         PrintStream pw = new PrintStream(System.out);
         
@@ -88,6 +90,8 @@ public abstract class User
                 break;
         }
         
+        // Os comandos abaixo pegam os dados dos usuários  solicitado pelo sistema
+        
         pw.println("//--------------------------------------");
         pw.println("||Código: " + this.getCode());
         pw.println("||Nome: " + this.getName());
@@ -99,7 +103,11 @@ public abstract class User
         pw.println("\\\\--------------------------------------");
     }
     
-    public void setType(String type) {
+    
+    // Abaixo os getters e setters da classe User
+    
+    public void setType(String type) 
+    {
         this.type = type;
     }    
     
