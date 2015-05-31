@@ -49,19 +49,19 @@ public class ProjetoBiblioteca
         
         try
         {
-            buffReader = new BufferedReader(new FileReader("users.txt")); // Leitura dos usuários no arquivo
+            buffReader = new BufferedReader(new FileReader("users.csv")); // Leitura dos usuários no arquivo
             userlist = getUsersList(buffReader);                          // Armazena os usuários na lista de usuários
             buffReader.close();
             
-            buffReader = new BufferedReader(new FileReader("logins.txt")); // Leitura dos logins no arquivo
+            buffReader = new BufferedReader(new FileReader("logins.csv")); // Leitura dos logins no arquivo
             loginlist = getLoginList(buffReader);                          // Armazena os logins na lista de logins
             buffReader.close();
             
-            buffReader = new BufferedReader(new FileReader("books.txt")); // Leitura dos livros armazenados no arquivo
+            buffReader = new BufferedReader(new FileReader("books.csv")); // Leitura dos livros armazenados no arquivo
             bookslist = getBooksList(buffReader);                         // Armazena os livros na lista de livros
             buffReader.close();
             
-            buffReader = new BufferedReader(new FileReader("borrowings.txt")); // Leitura dos empréstimos feitos no arquivo
+            buffReader = new BufferedReader(new FileReader("borrowings.csv")); // Leitura dos empréstimos feitos no arquivo
             borrowingslist = getBorrowingsList(buffReader);                    // Armazena os empréstimos na lista de empréstimos
             buffReader.close();
             
@@ -122,7 +122,8 @@ public class ProjetoBiblioteca
                                        + "\n\t||-------------------------------------------------||\n\n");
                     
                     for (Borrowing b : userBorrowings)   // Loop para mostrar o histórico de empréstimo de um determinado usuário
-                        b.printBorrowing(user, bookslist.get(b.getCodeBook()));
+                        if (date.compareTo(b.getDateBorrow()) >= 0)
+                            b.printBorrowing(user, bookslist.get(b.getCodeBook()));
                     
                     if (!userBorrowings.isEmpty())
                         System.out.println("\n\n:::   Listagem concluída com SUCESSO  :::\n");
@@ -138,7 +139,7 @@ public class ProjetoBiblioteca
                                        + "\n\t||-------------------------------------------------||\n\n");
                     
                     for (Borrowing b : userBorrowings)  // Caso ainda não tenha sido devolvido o livro será mostrado
-                        if (!b.isReturned())
+                        if ((!b.isReturned()) && (date.compareTo(b.getDateBorrow()) >= 0))
                             b.printBorrowing(user, bookslist.get(b.getCodeBook()));
                     
                     if (!userBorrowings.isEmpty())
@@ -169,6 +170,7 @@ public class ProjetoBiblioteca
                     }
                     
                     break;
+                    
                 case "5":
                     
                     System.out.println("Qual o titulo do livro que deseja devolver?\n");
@@ -219,6 +221,7 @@ public class ProjetoBiblioteca
                     System.out.println("\nVocê tem " + penalty + " dias de penalidade");
                     
                     break;
+                    
                 case "7":
                     /*--------- (7).  Visualizar todos usuários do sistema  ---------*/
                     System.out.println("\n\n\t||-------------------------------------------||"
@@ -243,7 +246,8 @@ public class ProjetoBiblioteca
                                        + "\n\t||--------------------------------------------||\n\n");
                     sortBorrowingsList(borrowingslist);
                     for (Borrowing b : borrowingslist)  // Loop para verificar os livros emprestado na biblioteca
-                        b.printBorrowing(userlist.get(b.getCodeUser()), bookslist.get(b.getCodeBook()));
+                        if (date.compareTo(b.getDateBorrow()) >= 0)
+                            b.printBorrowing(userlist.get(b.getCodeUser()), bookslist.get(b.getCodeBook()));
                     
                     if (!borrowingslist.isEmpty())
                         System.out.println("\n\n:::   Listagem concluída com SUCESSO  :::\n");
@@ -259,9 +263,10 @@ public class ProjetoBiblioteca
                                        + "\n\t||   Adicionar livro novo na biblioteca   ||"
                                        + "\n\t||----------------------------------------||\n\n");
                     
-                    askBook(bookslist, input);  // Chama o método para adicionar um novo livro
-                    
-                    System.out.println("\n\n:::   Inserção concluída com SUCESSO  :::\n");
+                    if (askBook(bookslist, input) != null)  // Chama o método para adicionar um novo livro
+                        System.out.println("\n\n:::   Inserção concluída com SUCESSO  :::\n");
+                    else
+                        System.out.println("\n\n:::   Inserção NÃO REALIZADA com sucesso.  :::\n");
                     
                     break;                            
             }
@@ -278,16 +283,16 @@ public class ProjetoBiblioteca
         
         // excluindo todos arquivos para serem reescritos corretamente (atualizados) no fim do programa
             
-            File file = new File("users.txt");
+            File file = new File("users.csv");
             file.delete();
             
-            file = new File("logins.txt");
+            file = new File("logins.csv");
             file.delete();
 
-            file = new File("borrowings.txt");
+            file = new File("borrowings.csv");
             file.delete();
 
-            file = new File("books.txt");
+            file = new File("books.csv");
             file.delete();
         
         // salvando as listas nos arquivos
@@ -332,7 +337,9 @@ public class ProjetoBiblioteca
         int issue, pages, quantity;   // Variáveis para as informações do livro
         String title, author, type;   // Strings para armazenar as informações do livro
         
-        Book book;                  // Livro  a ser criado
+        String option_existingBook;
+        
+        Book book;                    // Livro  a ser criado
         
         printHeader();
         
@@ -365,6 +372,29 @@ public class ProjetoBiblioteca
         quantity = input.nextInt(); // Quantos livros terá no sistema
         
         book = new Book(pages, issue, code, title, author, type, quantity, quantity); // Novo livro criado
+        
+        for (Book b : bookslist)
+        {
+            if (b.compareTo(book) == true)
+            {
+                System.out.println("\n::: O livro já existe! Deseja somar na quantidade de exemplares? :::\n");
+                System.out.println("(S) para sim e (N) para não: ");
+                do
+                {
+                    option_existingBook = input.nextLine();
+                } while ((!option_existingBook.toUpperCase().equals("S")) && (!option_existingBook.toUpperCase().equals("N")));
+                
+                if (option_existingBook.toUpperCase().equals("S"))
+                {
+                    b.setQuantity(b.getQuantity() + book.getQuantity());
+                    b.setAvailable(b.getAvailable() + book.getQuantity());
+                    
+                    return (b);
+                }
+                else
+                    return (null);
+            }
+        }
         
         bookslist.add(book);  // Livro adicionado no sistema
         
@@ -399,8 +429,14 @@ public class ProjetoBiblioteca
             System.out.print("   Ano: ");
             year = input.nextInt();
             System.out.println("");
-
-            return (new GregorianCalendar(year, month, day)); // Caso a opção seja 2 a data que será retornada será a fornecida pelo usuário
+            
+            if ((day < 0) || (month < 0) || (year < 0))
+            {
+                System.out.println("\n::: Data inválida! A data do sistema será a data atual. :::\n");
+                return (Calendar.getInstance()); 
+            }
+            else
+                return (new GregorianCalendar(year, month, day)); // Caso a opção seja 2 a data que será retornada será a fornecida pelo usuário
         }
     }
     
@@ -706,15 +742,13 @@ public class ProjetoBiblioteca
                 // caso o livro seja entregue com atraso, entra nesta condição
                 
                 
-                if(diffLate > 0 && diffLate >= diffForward){
-                    
+                if(diffLate > 0 && diffLate >= diffForward && (diffForward >= 0))
+                {
                     greaterDiff = max(greaterDiff, diffForward); // recebe o valor da diferença máxima
                     late += diffLate; // acumula as multas
                 }
-                
-                else if(diffMiddle > 0 && borrow.isReturned() == false){
+                else if(diffMiddle > 0 && borrow.isReturned() == false)
                     late += diffMiddle;
-                }
             }
         }
         
@@ -802,6 +836,12 @@ public class ProjetoBiblioteca
         Scanner input = new Scanner (System.in);
         bookTitle = input.nextLine();   // Armazena o nome do livro que será solicitado para empréstismo
         
+        if (bookTitle.length() == 0)
+        {
+            System.out.println("\n::: Nome inválido! :::\n");
+            return ;
+        }
+        
         for(Book b : bookslist)  // Loop para achar o livro solicitado
         {
             if(b.getTitle().equals(bookTitle))
@@ -876,7 +916,7 @@ public class ProjetoBiblioteca
         
         for (Borrowing b : userborrowings){
             //b.printBorrowing(userlist.get(b.getCodeUser()), bookslist.get(b.getCodeBook()));
-            if(b.getCodeBook()== codeBook && b.getCodeUser() == codeUser && b.isReturned() == false) // Verifica se é o livro e se ele não foi devolvido
+            if(b.getCodeBook() == codeBook && b.getCodeUser() == codeUser && b.isReturned() == false) // Verifica se é o livro e se ele não foi devolvido
                 borrowing = b;
         }
         if (borrowing != null)

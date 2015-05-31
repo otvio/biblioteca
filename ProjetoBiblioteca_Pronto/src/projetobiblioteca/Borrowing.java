@@ -154,7 +154,7 @@ public class Borrowing
     {
         try 
         {
-            File fp = new File("borrowings.txt");
+            File fp = new File("borrowings.csv");
             FileWriter fw = new FileWriter(fp, true);
             PrintWriter pw = new PrintWriter(fw); // cria um PrintWriter que irá escrever no arquivo
 

@@ -66,7 +66,7 @@ public class Login
     {
         try
         {
-            File fp = new File("logins.txt");
+            File fp = new File("logins.csv");
             FileWriter fw = new FileWriter(fp, true);
             PrintWriter pw = new PrintWriter(fw); // Cria um PrintWriter que irá escrever no arquivo
 

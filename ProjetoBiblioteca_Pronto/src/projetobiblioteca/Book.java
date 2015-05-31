@@ -97,7 +97,7 @@ public class Book
     {
         try
         {
-            File fp = new File("books.txt"); // variavel que 'representara' o arquivo book
+            File fp = new File("books.csv"); // variavel que 'representara' o arquivo book
             FileWriter fw = new FileWriter(fp, true); // empacotar o file para que possa escrever nele, e adicionar o campo true para indicar append
             PrintWriter pw = new PrintWriter(fw); // cria um PrintWriter que irá escrever no arquivo
 
@@ -134,5 +134,29 @@ public class Book
             System.out.println("Something wrong happens D:\n");
         }
     }
+
+    public void setQuantity(int quantity) 
+    {
+        this.quantity = quantity;
+    }
     
+    public boolean compareTo(Book book)
+    {
+        if (this.getPages() != book.getPages())
+            return (false);
+        
+        if (this.getIssue() != book.getIssue())
+            return (false);
+        
+        if (!this.getTitle().equals(book.getTitle()))
+            return (false);
+        
+        if (!this.getAuthor().equals(book.getAuthor()))
+            return (false);
+        
+        if (!this.getType().equals(book.getType()))
+            return (false);
+        
+        return (true);
+    }
 }

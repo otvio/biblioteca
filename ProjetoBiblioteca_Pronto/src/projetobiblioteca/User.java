@@ -36,7 +36,7 @@ public abstract class User
     {
         try
         {
-            File fp = new File("users.txt");
+            File fp = new File("users.csv");
             FileWriter fw = new FileWriter(fp, true);
             PrintWriter pw = new PrintWriter(fw); // cria um PrintWriter que irá escrever no arquivo
 
