@@ -68,8 +68,17 @@ public class ProjetoBiblioteca
         } catch (Exception ex) { }
         
         input = new Scanner (System.in);
+                
+        for (Borrowing b : borrowingslist)
+            today = max(today, max(b.getDateBorrow(), b.getDateReturn()));
         
-        date = askDate(input);             // O objeto recebe a data atual do sistema ou uma determinada pelo usuário. Isso depende de cada usuário
+        date = askDate(input);                   // O objeto recebe a data atual do sistema ou uma determinada pelo usuário. Isso depende de cada usuário
+        
+        if (date == null)
+            date = today;
+        
+        System.out.println("Hoje é: " + dateFormat.format(date.getTime()) + "\n");
+        
         readOnly = (date.compareTo(today) < 0);  // Se a data fornecida for uma data passada ai será ativado só o modo leitura para o usuário
         
         user = askUser(userlist, loginlist, input);  // Recebera um usuário pré-existente ou um recém criado
@@ -310,6 +319,11 @@ public class ProjetoBiblioteca
             b.addFileLogin();
     }
     
+    public static Calendar max(Calendar a, Calendar b)
+    {
+        return ((a.compareTo(b) < 0) ? b : a);
+    }
+    
     public static void printHeader()  // Método do cabeçalho do nome do sistema
     {
         System.out.println("\n\n\n\n\n");
@@ -418,7 +432,7 @@ public class ProjetoBiblioteca
         }while ((!date_choice.equals("1")) && (!date_choice.equals("2"))); // Loop para escolher somente uma das duas opções disponiveis
       
         if (date_choice.equals("1"))
-            return (Calendar.getInstance());       // Caso a opção seja 1 então será retornada a data atual do sistema
+            return (null);       // Caso a opção seja 1 então será retornada a data atual do sistema
         else
         {
             System.out.println("Digite a data desejada:");
@@ -433,7 +447,7 @@ public class ProjetoBiblioteca
             if ((day < 0) || (month < 0) || (year < 0))
             {
                 System.out.println("\n::: Data inválida! A data do sistema será a data atual. :::\n");
-                return (Calendar.getInstance()); 
+                return (null); 
             }
             else
                 return (new GregorianCalendar(year, month, day)); // Caso a opção seja 2 a data que será retornada será a fornecida pelo usuário
@@ -744,7 +758,7 @@ public class ProjetoBiblioteca
                 
                 if(diffLate > 0 && diffLate >= diffForward && (diffForward >= 0))
                 {
-                    greaterDiff = max(greaterDiff, diffForward); // recebe o valor da diferença máxima
+                    greaterDiff = StrictMath.max(greaterDiff, diffForward); // recebe o valor da diferença máxima
                     late += diffLate; // acumula as multas
                 }
                 else if(diffMiddle > 0 && borrow.isReturned() == false)
