@@ -27,7 +27,7 @@ Como executar:
 		
 		1 - Descompacte o zip para a pasta desejada.
 
-		2 - Abra o terminal e vá para o diretório onde está localizado o arquivo descompactado.		
+		2 - Abra o terminal e vá para a pasta "ProjetoBiblioteca".		
 
 		3 - Digite a seguinte linha de comando no terminal: java -jar ProjetoBiblioteca.jar
 		
