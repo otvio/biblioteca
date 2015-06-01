@@ -1,6 +1,13 @@
 
 package projetobiblioteca;
 
+import projetobiblioteca.login.Login;
+import projetobiblioteca.borrowing.Borrowing;
+import projetobiblioteca.book.Book;
+import projetobiblioteca.user.Student;
+import projetobiblioteca.user.Person;
+import projetobiblioteca.user.User;
+import projetobiblioteca.user.Teacher;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -14,7 +21,6 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
-import static java.lang.StrictMath.max;
 
 
 public class ProjetoBiblioteca
@@ -81,7 +87,7 @@ public class ProjetoBiblioteca
         
         readOnly = (date.compareTo(today) < 0);  // Se a data fornecida for uma data passada ai será ativado só o modo leitura para o usuário
         
-        user = askUser(userlist, loginlist, input);  // Recebera um usuário pré-existente ou um recém criado
+        user = askUser(userlist, loginlist, input);                      // Recebera um usuário pré-existente ou um recém criado
         userBorrowings = borrowedBooks(borrowingslist, user.getCode());  // Lista de empréstimos do usuário
         
         //loop principal do programa: checa a opcao escolhida pelo usuario e executa de acordo
@@ -319,15 +325,14 @@ public class ProjetoBiblioteca
             b.addFileLogin();
     }
     
-    public static Calendar max(Calendar a, Calendar b)
+    public static Calendar max(Calendar a, Calendar b) // retorna a data máxima entre os argumentos
     {
         return ((a.compareTo(b) < 0) ? b : a);
     }
     
     public static void printHeader()  // Método do cabeçalho do nome do sistema
     {
-        System.out.println("\n\n\n\n\n");
-        System.out.println("\t::: LORDedalus :::\n");
+        System.out.println("\n\t::: LORDedalus :::\n");
     }
     
     public static void printOptions()  // Menu inicial do sistema
@@ -394,14 +399,14 @@ public class ProjetoBiblioteca
                 System.out.println("\n::: O livro já existe! Deseja somar na quantidade de exemplares? :::\n");
                 System.out.println("(S) para sim e (N) para não: ");
                 do
-                {
+                { // laço para ler enquanto a entrada for diferente de "S", "s", "N", "n"
                     option_existingBook = input.nextLine();
                 } while ((!option_existingBook.toUpperCase().equals("S")) && (!option_existingBook.toUpperCase().equals("N")));
                 
                 if (option_existingBook.toUpperCase().equals("S"))
                 {
-                    b.setQuantity(b.getQuantity() + book.getQuantity());
-                    b.setAvailable(b.getAvailable() + book.getQuantity());
+                    b.setQuantity(b.getQuantity() + book.getQuantity());    // incrementa a qtd total de livros
+                    b.setAvailable(b.getAvailable() + book.getQuantity());  // incrementa a qtd disponivel de livros
                     
                     return (b);
                 }
@@ -444,7 +449,7 @@ public class ProjetoBiblioteca
             year = input.nextInt();
             System.out.println("");
             
-            if ((day < 0) || (month < 0) || (year < 0))
+            if ((day < 0) || (month < 0) || (year < 0)) // se o usuário forneceu uma data negativa
             {
                 System.out.println("\n::: Data inválida! A data do sistema será a data atual. :::\n");
                 return (null); 
@@ -500,7 +505,7 @@ public class ProjetoBiblioteca
             System.out.println("\nVocê se encaixa em qual categoria abaixo: ");  // Pergunta qual é o perfil que o usuário pré cadastrado se encaixa
             System.out.println("   (1). Professor");
             System.out.println("   (2). Estudante");
-            System.out.println("   (3). Outro");
+            System.out.println("   (3). Pessoa (Comunidade)");
             
             do
             {
@@ -609,11 +614,6 @@ public class ProjetoBiblioteca
         return (current.compareTo(borrowing.getDateReturn()) > 0);
     }
     
-    public static Borrowing borrowingAt(List<Borrowing> borrowingslist, int codeBorrowing)
-    {
-        return ((!borrowingslist.isEmpty()) ? (borrowingslist.get(borrowingslist.size() - 1 - codeBorrowing)) : null);
-    }
-    
     public static List<User> getUsersList(BufferedReader buffReader) throws IOException  // Irá criar uma lista de usuários a partir dos dados do arquivo
     {
         List<User> userlist = new ArrayList<>();  // Lista de usuário
@@ -683,12 +683,12 @@ public class ProjetoBiblioteca
         return (bookslist);
     }
 
-    private static List<Borrowing> getBorrowingsList(BufferedReader buffReader) throws IOException 
+    private static List<Borrowing> getBorrowingsList(BufferedReader buffReader) throws IOException // retorna a lista de empréstimos
     {
         List<Borrowing> borrowingslist = new ArrayList<>();
         String line;
 
-        while(buffReader.ready())
+        while(buffReader.ready())  // enquanto tem registros no arquivo
         {
             line = buffReader.readLine();
             String[] borrowingdata = line.split(","); // Método que coloca em um vetor as string que estavam separadas por virgula
@@ -707,7 +707,7 @@ public class ProjetoBiblioteca
     
     private static void sortBorrowingsList(List<Borrowing> list)  // Método para a ordenação da lista de empréstimos
     {
-        Collections.sort(list, new Comparator<Borrowing>()
+        Collections.sort(list, new Comparator<Borrowing>() // ordena de acordo com a data de empréstimo/código
         {
             @Override
             public int compare(Borrowing o1, Borrowing o2) 
@@ -804,7 +804,7 @@ public class ProjetoBiblioteca
         List<Login> loginlist = new ArrayList<>();
         String line;
         
-        while(buffReader.ready())
+        while(buffReader.ready()) // enquanto há registros no arquivo
         {
             line = buffReader.readLine();
             String[] logindata = line.split(","); // Método que coloca em um vetor as string que estavam separadas por virgula

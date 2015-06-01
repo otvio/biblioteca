@@ -1,5 +1,5 @@
 
-package projetobiblioteca;
+package projetobiblioteca.user;
 
 // Classe Teacher que passa no construtor o nome, cpf, rg, número máximo de empréstimo, o dia máximo, código  e o tipo de usuário. 
 

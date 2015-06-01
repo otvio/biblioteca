@@ -1,5 +1,5 @@
 
-package projetobiblioteca;
+package projetobiblioteca.book;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -140,7 +140,7 @@ public class Book
         this.quantity = quantity;
     }
     
-    public boolean compareTo(Book book)
+    public boolean compareTo(Book book) // método para comparar o livro "this" com o livro "book"
     {
         if (this.getPages() != book.getPages())
             return (false);

@@ -1,5 +1,5 @@
 
-package projetobiblioteca;
+package projetobiblioteca.login;
 
 import java.io.File;
 import java.io.FileWriter;

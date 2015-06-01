@@ -1,6 +1,8 @@
 
-package projetobiblioteca;
+package projetobiblioteca.borrowing;
 
+import projetobiblioteca.book.Book;
+import projetobiblioteca.user.User;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintStream;
