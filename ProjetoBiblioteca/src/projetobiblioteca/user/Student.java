@@ -1,6 +1,7 @@
 
-package projetobiblioteca;
+package projetobiblioteca.user;
 
+// Classe Student que passa no construtor o nome, cpf, rg, número máximo de empréstimo, o dia máximo, código  e o tipo de usuário. 
 
 public class Student extends User 
 {
