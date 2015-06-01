@@ -30,7 +30,8 @@ Como executar:
 		2 - Abra o terminal e vá para o diretório onde está localizado o arquivo descompactado.		
 
 		3 - Digite a seguinte linha de comando no terminal: java -jar projetobiblioteca.jar
-
+		
+		4 - Ver (início do programa).
 		
 		
 
