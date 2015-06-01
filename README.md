@@ -29,7 +29,7 @@ Como executar:
 
 		2 - Abra o terminal e vá para o diretório onde está localizado o arquivo descompactado.		
 
-		3 - Digite a seguinte linha de comando no terminal: java -jar projetobiblioteca.jar
+		3 - Digite a seguinte linha de comando no terminal: java -jar ProjetoBiblioteca.jar
 		
 		4 - Ver (início do programa).
 		
@@ -73,4 +73,28 @@ Como executar:
 
 
 			Obs2: O programa DEVE ser finalizado utilizando a opção (10) Sair para que as atualizações feitas em tempo de execução sejam armazenadas.	
+	
+	
+##########################################################################################################
 
+Como serão organizado os livros no arquivo:
+code,title,author,issue,type,pages,available,quantity
+
+
+
+Como serão organizado os usuários no arquivo:
+code,name,cpf,rg,bookLimit,daysLimit,type
+
+
+
+Como serão organizado os empréstimos no arquivo:
+code,codeUser,codeBook,returned,dateBorrow,dateReturn,dateMax
+
+Obs: dateBorrow e dateReturn são no formato: "DD/MM/YYYY"
+
+
+Como serão organizado os logins no arquivo:
+code,username,password,codeUser
+
+
+##########################################################################################################
