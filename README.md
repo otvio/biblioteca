@@ -7,7 +7,7 @@ SSC0103 - Programacão Orientada a Objetos - Prof. Adenilso da Silva Simão - Tr
 
 
 
-Membros do Grupo:				nºUsp
+Membros do Grupo:				nº USP
 				
 	- Laércio de Oliveira Júnior		8922198		
 	
