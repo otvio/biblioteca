@@ -40,7 +40,7 @@ Como executar:
 
 		1 - Descompacte o zip para a pasta desejada.
 
-		2 - No Netbeans, abra o projeto "ProjetoBiblioteca_Pronto".	
+		2 - No Netbeans, abra o projeto "ProjetoBiblioteca".	
 		
 		3 - Aperte Shift-F11 para limpar e construir o projeto e em seguida F6 para executar o projeto.
 		
