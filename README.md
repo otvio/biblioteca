@@ -23,7 +23,7 @@ Professor:
 	
 Como executar:
 
-	No Linux:
+	No Linux (Terminal):
 		
 		1 - Descompacte o zip para a pasta desejada.
 
@@ -36,12 +36,16 @@ Como executar:
 		
 
 
-	No Windows:
+	No Windows (Netbeans):
 
+		1 - Descompacte o zip para a pasta desejada.
 
-
+		2 - No Netbeans, abra o projeto "ProjetoBiblioteca_Pronto".	
 		
-
+		3 - Aperte Shift-F11 para limpar e construir o projeto e em seguida F6 para executar o projeto.
+		
+		4 - Ver (início do programa).
+		
 
 
 		Início do programa:
