@@ -19,7 +19,7 @@ Professor:
 
 	- Adenilso Simao   -  Programação Orientada a Objetos (P.O.O).	
 			
-
+Obs: versão pronta em "Releases".
 	
 Como executar:
 
