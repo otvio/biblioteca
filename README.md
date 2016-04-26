@@ -13,7 +13,7 @@ Membros do Grupo:				nº USP
 	
 	- Luis Ricardo Guabiraba da Silva	  8937402
 					
-	- Otávio Augusto Ferreira Sousa        8936801
+	- Otávio Augusto Ferreira Sousa       8936801
 
 Professor:
 
