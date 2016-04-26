@@ -9,11 +9,11 @@ SSC0103 - Programacão Orientada a Objetos - Prof. Adenilso da Silva Simão - Tr
 
 Membros do Grupo:				nº USP
 				
-	- Laércio de Oliveira Júnior		  8922198		
+	- Laércio de Oliveira Júnior		    8922198		
 	
-	- Luis Ricardo Guabiraba da Silva	8937402
+	- Luis Ricardo Guabiraba da Silva	    8937402
 					
-	- Otávio Augusto Ferreira Sousa		 8936801
+	- Otávio Augusto Ferreira Sousa		    8936801
 
 Professor:
 
